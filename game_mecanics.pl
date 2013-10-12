@@ -41,8 +41,7 @@ append([A|L1],L2,[A|L3]) :- append(L1,L2,L3).
 % ? - ajoutePion([2,1], w, [[[1,1],[-1,-1]],[[1,-1],[-1,1]]], Plateau).
 % > Plateau = [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]
 
-ajoutePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, Pions),
-											  append(Pions, Pion, NewPlateau).
+ajoutePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, Pions), append(Pions, [Pion], NewPlateau).
 
 %------------- fin ajoutePion() ------------------
 									
