@@ -29,4 +29,20 @@ append([ ], L1, L1).
 append([A|L1],L2,[A|L3]) :- append(L1,L2,L3).
 
 %------------- fin append() ------------------
+
+
+%--------------------------------------------------
+% ajoutePion(+Pion,+Couleur,+Plateau,-NewPlateau)
+% @Tanguy
+%
+% Ajoute Pion à la liste des pions du joueur selon sa couleur (Couleur)
+%
+% ex:
+% ? - ajoutePion([2,1], w, [[[1,1],[-1,-1]],[[1,-1],[-1,1]]], Plateau).
+% > Plateau = [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]
+
+ajoutePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, Pions),
+											  append(Pions, Pion, NewPlateau).
+
+%------------- fin ajoutePion() ------------------
 									
