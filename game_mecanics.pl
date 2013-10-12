@@ -78,6 +78,22 @@ retirePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, 
 
 
 %--------------------------------------------------
+% joueurDuPion(+Pion,+Plateau,-Couleur)
+% @Tanguy
+%
+% Renvoi la couleur du joueur qui possede Pion
+%
+% ex:
+% ? - joueurDuPion([1,1], [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]], Couleur).
+% > Couleur = w
+
+joueurDuPion(Pion, [J1|[J2]], w) :- memberchk(Pion, J1).
+joueurDuPion(Pion, [J1|[J2]], b) :- memberchk(Pion, J2).
+
+%------------- fin joueurDuPion() ------------------
+
+
+%--------------------------------------------------
 % retourne(+PionARetourner,+Plateau,-NewPlateau)
 % @Tanguy
 %
@@ -88,7 +104,7 @@ retirePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, 
 % 
 %
 
-%retourne(P,[J1|[J2]],NewPlateau) :- 
+%retourne(P,[J1|[J2]],NewPlateau) :- retirePion(P,
 
 %------------- fin retourne() ------------------
 
