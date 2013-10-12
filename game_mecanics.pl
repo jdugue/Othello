@@ -9,8 +9,8 @@
 % ? - pionsJoueur(w, [[[1,1],[-1,-1]],[[1,-1],[-1,1]]], Pions).
 % > Pions = [[1,1],[-1,-1]]
 
-pionsJoueur(w, [PionsJ1|[PionsJ2]], PionsJ1).
-pionsJoueur(b, [PionsJ1|[PionsJ2]], PionsJ2).
+pionsJoueur(w, [PionsJ1|[_]], PionsJ1).
+pionsJoueur(b, [_|[PionsJ2]], PionsJ2).
 
 %------------- fin pionsJoueur() ------------------
 
@@ -104,7 +104,7 @@ joueurDuPion(Pion, [J1|[J2]], b) :- memberchk(Pion, J2).
 % 
 %
 
-%retourne(P,[J1|[J2]],NewPlateau) :- retirePion(P,
+%retourne(P,Plateau,NewPlateau) :- joueurDuPion(P,Plateau,Couleur), retirePion(P, Couleur,Plateau,Plateau2), couleur_adversaire(Couleur, Adversaire), ajoutePion(P, Adversaire, Plateau2, NewPlateau). 
 
 %------------- fin retourne() ------------------
 
