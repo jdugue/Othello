@@ -50,12 +50,5 @@ case_voisine([Xd, Yd], nordEst, [Xa, Ya]) :- voisin_superieur(Xd, Xa), voisin_su
 	Permet de récupérer la couleur de l'adversaire.
 	couleur_adversaire(+C1, -C2): Affecte à C2 la couleur de l'adversaire de C1.
 ***************************************************************************************************************************************/
-couleur_adversaire(noir, blanc).
-couleur_adversaire(blanc, noir).
-
-/***************************************************************************************************************************************
-	Permet de récupérer la liste des pions d'un joueur suivant sa couleur.
-	pions_joueur(+Couleur, +Plateau, -Pions): Affecte à Pions la liste des pions du joueur dont la couleur est Couleur.
-***************************************************************************************************************************************/
-pions_joueur(noir, [X, _], X).
-pions_joueur(blanc, [_, X], X).
+couleur_adversaire(b, w).
+couleur_adversaire(w, b).
