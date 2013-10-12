@@ -7,7 +7,7 @@ Projet prolog INSA de Lyon 4IF
 
 <b>Quatres couches/catégories :</b><br />
 - Configuration / Lancement<br />
--Display<br />
+- Display<br />
 - Mécanique<br />
 - Une couche pour chaque IA<br />
 
