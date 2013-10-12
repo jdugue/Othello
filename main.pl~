@@ -12,5 +12,3 @@ couleur_adverse(b,w).
 couleur_adverse(w,b).
 
 %------------- fin couleur_adverse() ------------------
-
-
