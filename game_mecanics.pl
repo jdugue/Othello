@@ -57,9 +57,24 @@ setPionsJoueur(b,Pions,[J1|[J2]],[J1|[Pions]]).
 % ? - ajoutePion([2,1], w, [[[1,1],[-1,-1]],[[1,-1],[-1,1]]], Plateau).
 % > Plateau = [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]
 
-ajoutePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, Pions), append(Pions, [Pion], NewPlateau).
+ajoutePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, Pions), append(Pions, [Pion], NewPions), setPionsJoueur(Couleur, NewPions, Plateau, NewPlateau).
 
 %------------- fin ajoutePion() ------------------
+
+
+%--------------------------------------------------
+% retirePion(+Pion,+Couleur,+Plateau,-NewPlateau)
+% @Tanguy
+%
+% Retire Pion de la liste des pions du joueur selon sa couleur (Couleur)
+%
+% ex:
+% ? - retirePion([2,1], w, [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]], Plateau).
+% > Plateau = [[[1,1],[-1,-1]],[[1,-1],[-1,1]]]
+
+retirePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, Pions), append(NewPions, [Pion], Pions), setPionsJoueur(Couleur, NewPions, Plateau, NewPlateau).
+
+%------------- fin retirePion() ------------------
 
 
 %--------------------------------------------------
@@ -73,7 +88,7 @@ ajoutePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, 
 % 
 %
 
-retourne(P,[J1|[J2]],NewPlateau) :- 
+%retourne(P,[J1|[J2]],NewPlateau) :- 
 
 %------------- fin retourne() ------------------
 
