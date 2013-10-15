@@ -57,7 +57,8 @@ setPionsJoueur(b,Pions,[J1|[J2]],[J1|[Pions]]).
 % ? - ajoutePion([2,1], w, [[[1,1],[-1,-1]],[[1,-1],[-1,1]]], Plateau).
 % > Plateau = [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]
 
-ajoutePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, Pions), append(Pions, [Pion], NewPions), setPionsJoueur(Couleur, NewPions, Plateau, NewPlateau).
+ajoutePion(Pion, Couleur, Plateau, NewPlateau) :-
+	pionsJoueur(Couleur, Plateau, Pions), append(Pions, [Pion], NewPions), setPionsJoueur(Couleur, NewPions, Plateau, NewPlateau).
 
 %------------- fin ajoutePion() ------------------
 
@@ -72,7 +73,8 @@ ajoutePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, 
 % ? - retirePion([2,1], w, [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]], Plateau).
 % > Plateau = [[[1,1],[-1,-1]],[[1,-1],[-1,1]]]
 
-retirePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, Pions), delete(Pions, Pion, NewPions), setPionsJoueur(Couleur, NewPions, Plateau, NewPlateau).
+retirePion(Pion, Couleur, Plateau, NewPlateau) :-
+	pionsJoueur(Couleur, Plateau, Pions), delete(Pions, Pion, NewPions), setPionsJoueur(Couleur, NewPions, Plateau, NewPlateau).
 
 %------------- fin retirePion() ------------------
 
@@ -102,53 +104,9 @@ joueurDuPion(Pion, [J1|[J2]], b) :- memberchk(Pion, J2).
 %
 % ex:
 % ? - retourne([1,1], [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]], Plateau).
-%
+% > Plateau = [[[-1, -1], [2, 1]], [[1, -1], [-1, 1], [1, 1]]]
 
-retourne(P,Plateau,NewPlateau) :- joueurDuPion(P,Plateau,Couleur), retirePion(P, Couleur,Plateau,Plateau2), couleur_adversaire(Couleur, Adversaire), ajoutePion(P, Adversaire, Plateau2, NewPlateau). 
+retourne(P,Plateau,NewPlateau) :-
+	joueurDuPion(P,Plateau,Couleur), retirePion(P, Couleur,Plateau,Plateau2), couleur_adversaire(Couleur, Adversaire), ajoutePion(P, Adversaire, Plateau2, NewPlateau). 
 
-%------------- fin retourne() ------------------
-
-%--------------------------------------------------
-% est_vide(+Position,+Plateau)
-% @Tanguy
-%
-% Regarde si la case Position est vide.
-%
-% ex:
-% ? - est_vide([3,3],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]).
-% ? - est_vide([1,1],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]).
-%
-
-est_vide(Position,[J1|[J2]]) :- not(memberchk(Position,J1)), not(memberchk(Position,J2)).
-
-%------------- fin est_vide() ------------------
-
-%--------------------------------------------------
-% calcul_cases_vides(+Positions,+Plateau,-Vides)
-% @Tanguy
-%
-% Renvoie la liste des +Positions vides.
-%
-% ex:
-% ? - calcul_cases_vides([[-2,1],[1,1],[-3,1],[3,3]],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]],X).
-%
-calcul_cases_vides([Pos],Plateau,[Pos]) :- est_vide(Pos,Plateau).
-calcul_cases_vides([Pos],Plateau,[]).
-calcul_cases_vides([T|Q],Plateau,[T|Vides]) :- est_vide(T,Plateau), calcul_cases_vides(Q,Plateau,Vides).
-calcul_cases_vides([T|Q],Plateau,Vides) :- calcul_cases_vides(Q,Plateau,Vides).
-
-%------------- fin calcul_cases_vides() ------------------
-
-%--------------------------------------------------
-% cases_vides(+Positions,+Plateau,-Vides)
-% @Tanguy
-%
-% Renvoie le premier element de calcul_cases_vides()
-%
-% ex:
-% ? - cases_vides([[-2,1],[1,1],[-3,1],[3,3]],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]],X).
-%
-cases_vides(Positions,Plateau,ListeCases) :- findall(Vides, calcul_cases_vides(Positions,Plateau,Vides), [ListeCases|_]).
-
-%------------- fin cases_vides() ------------------
-							
+%------------- fin retourne() ------------------						
