@@ -5,7 +5,7 @@
 ***************************************************************************************************************************************/
 init_plateau([[[1, 1], [-1, -1]], [[-1, 1], [1, -1]]]).
 
-faux_plateau([[[1,1] , [1,2] ] , [[1,3],[4,4]]]).
+faux_plateau([[ [1,4],[3,1] ] , [[1,3],[1,2],[2,1]]]).
 /***************************************************************************************************************************************
 	renvoie la valeur de l'indice supérieur à celui reçu en argument en tenant compte de l'ordre suivant:
 	-3, -2, -1, 1, 2, 3
@@ -33,9 +33,10 @@ voisin_superieur(3, 4).
 	- sud
 	- sudOuest
 	- ouest
-	- nordOuest
-	
-	case_voisine(+Case, +Direction, -CaseVoisine) -> Renvoie la case voisine de Case suivant la direction Direction.
+	- nordOuest*/
+directions([sud,nord,est,ouest,sudEst,nordEst,sudOuest,nordOuest]).
+
+/*	case_voisine(+Case, +Direction, -CaseVoisine) -> Renvoie la case voisine de Case suivant la direction Direction.
 	case_voisine(+Case, -Direction, -CaseVoisine) -> Renvoie toutes les cases voisines de Case en backtrackant.
 ***************************************************************************************************************************************/
 case_voisine([Xd, Yd], est, [Xa, Yd]) :- voisin_superieur(Xd, Xa).

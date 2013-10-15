@@ -139,12 +139,12 @@ cases_vides([T|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
 
 %------------- fin cases_vides() ------------------
 
-case_suivante(Case , Direction , Plateau , Couleur , _) :- est_vide(Case , Plateau).
-case_suivante(Case , Direction , Plateau , Couleur , _) :- joueurDuPion(Case , Plateau , Couleur ).
-case_suivante(Case , Direction , Plateau , Couleur , _) :- not(case_voisine(Case , Direction,X)).
+case_suivante(Case , Direction , Plateau , Couleur , []) :- joueurDuPion(Case , Plateau , Couleur ).
+%case_suivante(Case , Direction , Plateau , Couleur , []) :- not(case_voisine(Case , Direction,X)).
 
 case_suivante(Case , Direction , Plateau , Couleur , [Case| CaseSand]) :- 
 	case_voisine(Case, Direction , CaseVoisine), 
+	not(est_vide(CaseVoisine , Plateau)),
 	case_suivante(CaseVoisine , Direction , Plateau , Couleur , CaseSand).
 
 %---------------
@@ -153,12 +153,15 @@ case_suivante(Case , Direction , Plateau , Couleur , [Case| CaseSand]) :-
 % Direction : la direction dans laquelle on check
 % Plateau
 % Couleur : la couleur qu'on veut jouer
-%
+% Liste : La liste des pions à retourner
 % @Joss et Ianic
 %
-% Quand on se place a une position, renvoie la liste des cases occupées par des pionts de la couleur adverse
-% jusqu'a ce qu'on retrouve un piont de la couleur Couleur, ou renvoie false si on trouve une case vide ou
-% un mur
+% Quand on se place a une position, renvoie la liste des cases occupées par des pions de la couleur adverse
+% jusqu'a ce qu'on retrouve un pion de la couleur Couleur.
 
-%sandwich(Case , Direction , Plateau , Couleur , Liste) :-
-%	case_voisine(Case , Direction , NouvelleCase),
+sandwich(Case , Direction , Plateau , Couleur , Q) :-
+	case_suivante(Case , Direction , Plateau , Couleur , [T| Q]).
+
+cases_a_retourner(Case,Plateau,Couleur,ARetourner) :- 
+	findall(CasesRetourner,sandwich(Case , Direction , Plateau , Couleur , CasesRetourner),ARetourner).
+
