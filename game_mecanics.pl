@@ -138,7 +138,15 @@ cases_vides([T|Q],Plateau,[T|Vides]) :- est_vide(T,Plateau), cases_vides(Q,Plate
 cases_vides([T|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
 
 %------------- fin cases_vides() ------------------
-							
+
+case_suivante(Case , Direction , Plateau , Couleur , _), est_vide(Case , Plateau).
+case_suivante(Case , Direction , Plateau , Couleur , _), joueurDuPion(Case , Plateau , Couleur ).
+case_suivante(Case , Direction , Plateau , Couleur , _), not(case_voisine(Case , Direction)).
+
+case_suivante(Case , Direction , Plateau , Couleur , [Case| CaseSand]) :- 
+	case_voisine(Case, Direction , CaseVoisine), 
+	case_suivante(CaseVoisine , Direction , Plateau , Couleur , CaseSand).
+
 %---------------
 % sandwich(+Case, +Direction , +Plateau , +Couleur , -Liste)
 % Case : la case vide pour laquelle on veut checker
@@ -152,6 +160,5 @@ cases_vides([T|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
 % jusqu'a ce qu'on retrouve un piont de la couleur Couleur, ou renvoie false si on trouve une case vide ou
 % un mur
 
-sandwich(Case , Direction , Plateau , Couleur , Liste) :-
-	case_voisine(Case , Direction , NouvelleCase),
-	joueurDuPion(NouvelleCase , Plateau , CouleurPion) == couleur_adversaire(Couleur , CouleurPion).
+%sandwich(Case , Direction , Plateau , Couleur , Liste) :-
+%	case_voisine(Case , Direction , NouvelleCase),
