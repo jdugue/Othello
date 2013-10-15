@@ -46,6 +46,13 @@ case_voisine([Xd, Yd], nordOuest, [Xa, Ya]) :- voisin_superieur(Xa, Xd), voisin_
 case_voisine([Xd, Yd], nord, [Xd, Ya]) :- voisin_superieur(Yd, Ya).
 case_voisine([Xd, Yd], nordEst, [Xa, Ya]) :- voisin_superieur(Xd, Xa), voisin_superieur(Yd, Ya).
 
+/******************************************************************************************
+@Joss et Ianic
+renvoie les cases voisines d'une case dans une liste.
+**********************************************************************************************/
+liste_case_voisine( Case , Liste) :-
+	findall( Voisin , case_voisine(Case, Direction, Voisin) , Liste).
+
 /***************************************************************************************************************************************
 	Permet de récupérer la couleur de l'adversaire.
 	couleur_adversaire(+C1, -C2): Affecte à C2 la couleur de l'adversaire de C1.
