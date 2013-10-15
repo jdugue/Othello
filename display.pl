@@ -5,7 +5,7 @@
 % 	PN correspond à la liste des pions noirs
 % 	PB correspond à la liste des pions blancs
 
-	afficher_plateau(P) :- write('	A B C D E F G H\n1	'), display_elem(-4, 4, P).
+	display(P) :- write('	A B C D E F G H\n1	'), display_elem(-4, 4, P).
 	
 %--------------------------------------------------
 
