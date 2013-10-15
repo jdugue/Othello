@@ -104,7 +104,11 @@ joueurDuPion(Pion, [J1|[J2]], b) :- memberchk(Pion, J2).
 % ? - retourne([1,1], [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]], Plateau).
 %
 
-retourne(P,Plateau,NewPlateau) :- joueurDuPion(P,Plateau,Couleur), retirePion(P, Couleur,Plateau,Plateau2), couleur_adversaire(Couleur, Adversaire), ajoutePion(P, Adversaire, Plateau2, NewPlateau). 
+retourne(P,Plateau,NewPlateau) :- 
+	joueurDuPion(P,Plateau,Couleur), 
+	retirePion(P, Couleur,Plateau,Plateau2), 
+	couleur_adversaire(Couleur, Adversaire), 
+	ajoutePion(P, Adversaire, Plateau2, NewPlateau). 
 
 %------------- fin retourne() ------------------
 
