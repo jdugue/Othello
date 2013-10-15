@@ -72,7 +72,7 @@ ajoutePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, 
 % ? - retirePion([2,1], w, [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]], Plateau).
 % > Plateau = [[[1,1],[-1,-1]],[[1,-1],[-1,1]]]
 
-retirePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, Pions), append(NewPions, [Pion], Pions), setPionsJoueur(Couleur, NewPions, Plateau, NewPlateau).
+retirePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, Pions), delete(Pions, Pion, NewPions), setPionsJoueur(Couleur, NewPions, Plateau, NewPlateau).
 
 %------------- fin retirePion() ------------------
 
@@ -108,4 +108,34 @@ retourne(P,Plateau,NewPlateau) :- joueurDuPion(P,Plateau,Couleur), retirePion(P,
 
 %------------- fin retourne() ------------------
 
-									
+%--------------------------------------------------
+% est_vide(+Position,+Plateau)
+% @Tanguy
+%
+% Regarde si la case Position est vide.
+%
+% ex:
+% ? - est_vide([3,3],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]).
+% ? - est_vide([1,1],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]).
+%
+
+est_vide(Position,[J1|[J2]]) :- not(memberchk(Position,J1)), not(memberchk(Position,J2)).
+
+%------------- fin est_vide() ------------------
+
+%--------------------------------------------------
+% cases_vides(+Positions,+Plateau,-Vides)
+% @Tanguy
+%
+% Renvoie la liste des +Positions vides.
+%
+% ex:
+% ? - cases_vides([[-2,1],[1,1],[-3,1],[3,3]],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]],X).
+%
+cases_vides([Pos],Plateau,[Pos]) :- est_vide(Pos,Plateau).
+cases_vides([Pos],Plateau,[]).
+cases_vides([T|Q],Plateau,[T|Vides]) :- est_vide(T,Plateau), cases_vides(Q,Plateau,Vides).
+cases_vides([T|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
+
+%------------- fin cases_vides() ------------------
+							
