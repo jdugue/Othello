@@ -59,6 +59,11 @@ calcul_cases_voisines([T|Q], CasesVides) :-  calcul_cases_voisines(Q, OldVides),
 	
 cases_voisines_joueur(Couleur, Plateau, Cases) :- pionsJoueur(Couleur, Plateau, Pions), calcul_cases_voisines(Pions, TempCases), sort(TempCases, Cases).
 
+
+
+
+
+coups_legaux(Couleur, Plateau, Coups) :- couleur_adversaire(Couleur,Adversaire), cases_voisines_joueur(Adversaire, Plateau, Voisines), cases_vides(Voisines, Plateau, Coups).
 /***************************************************************************************************************************************
 	Permet de récupérer la couleur de l'adversaire.
 	couleur_adversaire(+C1, -C2): Affecte à C2 la couleur de l'adversaire de C1.
