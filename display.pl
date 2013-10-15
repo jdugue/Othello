@@ -1,4 +1,4 @@
-:- [game_mecanics].
+:- [regles].
 
 %--------------------------------------------------
 %	@Mohammed
@@ -6,6 +6,7 @@
 % 	Affiche l'ensemble du plateau en variant la colonne et ligne de -N à N
 % 	PN correspond à la liste des pions noirs
 % 	PB correspond à la liste des pions blancs
+%	ex : display([[[1,1],[2,1]],[[1,-1],[-4,4]]]).
 
 	display([PN, PB]) :- write('   A B C D E F G H\n1  '), display_elem(-4, 4, [PN, PB]).
 	
