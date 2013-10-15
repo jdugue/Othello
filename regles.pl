@@ -40,7 +40,7 @@ voisin_superieur(3, 4).
 % > Voisine = [1,-1]
 % ? - case_voisine([1,1], D, C).
 % > D = est,		D = sudEst,		D = sud,		D = sudOuest,	D = ouest,		D = nordOuest,	D = nord,		D = nordEst,
-	C = [2, 1] ;	C = [2, -1] ;	C = [1, -1] ;	C = [-1, -1] ;	C = [-1, 1] ;	C = [-1, 2] ;	C = [1, 2] ;	C = [2, 2]
+%	C = [2, 1] ;	C = [2, -1] ;	C = [1, -1] ;	C = [-1, -1] ;	C = [-1, 1] ;	C = [-1, 2] ;	C = [1, 2] ;	C = [2, 2]
 
 case_voisine([Xd, Yd], est, [Xa, Yd]) :- voisin_superieur(Xd, Xa).
 case_voisine([Xd, Yd], sudEst, [Xa, Ya]) :- voisin_superieur(Xd, Xa), voisin_superieur(Ya, Yd).
