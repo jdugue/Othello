@@ -166,4 +166,7 @@ case_suivante(Case , Direction , Plateau , Couleur , [Case| CaseSand]) :-
 % jusqu'a ce qu'on retrouve un pion de la couleur Couleur.
 
 sandwich(Case , Direction , Plateau , Couleur , Q) :-
-	case_suivante(Case , Direction , Plateau , Couleur , [T| Q]).						
+	case_suivante(Case , Direction , Plateau , Couleur , [T| Q]).	
+
+cases_a_retourner(Case,Plateau,Couleur,ARetourner) :- 
+	findall(CasesRetourner,sandwich(Case , Direction , Plateau , Couleur , CasesRetourner),ARetourner).					
