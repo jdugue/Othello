@@ -139,9 +139,9 @@ cases_vides([T|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
 
 %------------- fin cases_vides() ------------------
 
-case_suivante(Case , Direction , Plateau , Couleur , _), est_vide(Case , Plateau).
-case_suivante(Case , Direction , Plateau , Couleur , _), joueurDuPion(Case , Plateau , Couleur ).
-case_suivante(Case , Direction , Plateau , Couleur , _), not(case_voisine(Case , Direction)).
+case_suivante(Case , Direction , Plateau , Couleur , _) :- est_vide(Case , Plateau).
+case_suivante(Case , Direction , Plateau , Couleur , _) :- joueurDuPion(Case , Plateau , Couleur ).
+case_suivante(Case , Direction , Plateau , Couleur , _) :- not(case_voisine(Case , Direction,X)).
 
 case_suivante(Case , Direction , Plateau , Couleur , [Case| CaseSand]) :- 
 	case_voisine(Case, Direction , CaseVoisine), 
