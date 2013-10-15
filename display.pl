@@ -8,7 +8,7 @@
 % 	PB correspond à la liste des pions blancs
 %	ex : display([[[1,1],[2,1]],[[1,-1],[-4,4]]]).
 
-	display([PB, PN]) :- print('   A B C D E F G H\n4  '), display_elem(-4, 4, [PB, PN]).
+	display([PB, PN]) :- print('   A B C D E F G H\n  '), display_elem(-4, 4, [PB, PN]).
 	
 %--------------------------------------------------
 
@@ -20,14 +20,15 @@
 %	param1 : numéro de la ligne
 %	param3 : liste : [pions noirs, pions blancs] 
 
-	display_elem(4, -4, [PB, PN]) :- !, display_cell([4, -4], [PB, PN]), print('\n\n').
+	display_elem(4, -4, [PB, PN]) :- !, display_cell([4, -4], [PB, PN]), print('  -4\n\n').
 
 	% Si on est en fin de ligne
 	display_elem(4, L, [PB, PN]) :-
 		display_cell([4, L], [PB, PN]), 
+		print('  '),
+		print(L),
 		print('\n'), 
 		voisin_superieur(L1, L), !, % On passe à la ligne suivante
-		print(L1),
 		print('  '),
 		display_elem(-4, L1, [PB, PN]).
 		
