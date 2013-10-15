@@ -50,7 +50,7 @@ case_voisine([Xd, Yd], nordEst, [Xa, Ya]) :- voisin_superieur(Xd, Xa), voisin_su
 @Joss et Ianic
 renvoie les cases voisines d'une case dans une liste.
 **********************************************************************************************/
-liste_case_voisine( Case , Liste) :-
+case_voisine_pos( Case , Liste) :-
 	findall( Voisin , case_voisine(Case, Direction, Voisin) , Liste).
 
 /***************************************************************************************************************************************

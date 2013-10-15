@@ -124,18 +124,31 @@ est_vide(Position,[J1|[J2]]) :- not(memberchk(Position,J1)), not(memberchk(Posit
 %------------- fin est_vide() ------------------
 
 %--------------------------------------------------
-% cases_vides(+Positions,+Plateau,-Vides)
+% calcul_cases_vides(+Positions,+Plateau,-Vides)
 % @Tanguy
 %
 % Renvoie la liste des +Positions vides.
 %
 % ex:
+% ? - calcul_cases_vides([[-2,1],[1,1],[-3,1],[3,3]],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]],X).
+%
+calcul_cases_vides([Pos],Plateau,[Pos]) :- est_vide(Pos,Plateau).
+calcul_cases_vides([Pos],Plateau,[]).
+calcul_cases_vides([T|Q],Plateau,[T|Vides]) :- est_vide(T,Plateau), calcul_cases_vides(Q,Plateau,Vides).
+calcul_cases_vides([T|Q],Plateau,Vides) :- calcul_cases_vides(Q,Plateau,Vides).
+
+%------------- fin calcul_cases_vides() ------------------
+
+%--------------------------------------------------
+% cases_vides(+Positions,+Plateau,-Vides)
+% @Tanguy
+%
+% Renvoie le premier element de calcul_cases_vides()
+%
+% ex:
 % ? - cases_vides([[-2,1],[1,1],[-3,1],[3,3]],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]],X).
 %
-cases_vides([Pos],Plateau,[Pos]) :- est_vide(Pos,Plateau).
-cases_vides([Pos],Plateau,[]).
-cases_vides([T|Q],Plateau,[T|Vides]) :- est_vide(T,Plateau), cases_vides(Q,Plateau,Vides).
-cases_vides([T|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
+cases_vides(Positions,Plateau,ListeCases) :- findall(Vides, calcul_cases_vides(Positions,Plateau,Vides), [ListeCases|_]).
 
 %------------- fin cases_vides() ------------------
 							
