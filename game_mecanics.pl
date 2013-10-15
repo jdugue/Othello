@@ -57,7 +57,8 @@ setPionsJoueur(b,Pions,[J1|[J2]],[J1|[Pions]]).
 % ? - ajoutePion([2,1], w, [[[1,1],[-1,-1]],[[1,-1],[-1,1]]], Plateau).
 % > Plateau = [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]
 
-ajoutePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, Pions), append(Pions, [Pion], NewPions), setPionsJoueur(Couleur, NewPions, Plateau, NewPlateau).
+ajoutePion(Pion, Couleur, Plateau, NewPlateau) :-
+	pionsJoueur(Couleur, Plateau, Pions), append(Pions, [Pion], NewPions), setPionsJoueur(Couleur, NewPions, Plateau, NewPlateau).
 
 %------------- fin ajoutePion() ------------------
 
@@ -72,7 +73,8 @@ ajoutePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, 
 % ? - retirePion([2,1], w, [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]], Plateau).
 % > Plateau = [[[1,1],[-1,-1]],[[1,-1],[-1,1]]]
 
-retirePion(Pion, Couleur, Plateau, NewPlateau) :- pionsJoueur(Couleur, Plateau, Pions), delete(Pions, Pion, NewPions), setPionsJoueur(Couleur, NewPions, Plateau, NewPlateau).
+retirePion(Pion, Couleur, Plateau, NewPlateau) :-
+	pionsJoueur(Couleur, Plateau, Pions), delete(Pions, Pion, NewPions), setPionsJoueur(Couleur, NewPions, Plateau, NewPlateau).
 
 %------------- fin retirePion() ------------------
 
@@ -164,8 +166,4 @@ case_suivante(Case , Direction , Plateau , Couleur , [Case| CaseSand]) :-
 % jusqu'a ce qu'on retrouve un pion de la couleur Couleur.
 
 sandwich(Case , Direction , Plateau , Couleur , Q) :-
-	case_suivante(Case , Direction , Plateau , Couleur , [T| Q]).
-
-cases_a_retourner(Case,Plateau,Couleur,ARetourner) :- 
-	findall(CasesRetourner,sandwich(Case , Direction , Plateau , Couleur , CasesRetourner),ARetourner).
-
+	case_suivante(Case , Direction , Plateau , Couleur , [T| Q]).						
