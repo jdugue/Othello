@@ -1,4 +1,5 @@
 :- [regles].
+:- [color].
 
 %--------------------------------------------------
 %	@Mohammed
@@ -52,9 +53,9 @@
 	display_cell(C, [PB, PN]) :-
 		print(' '),
 		(member(C, PN) ->
-			print('x');
+			ansi_format([fg(red)], '●', []);
 			(member(C, PB) ->
-				print('o');
+				ansi_format([fg(green)], '●', []);
 				print('.')
 			)
 		).
