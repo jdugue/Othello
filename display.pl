@@ -1,3 +1,5 @@
+:- [game_mecanics].
+
 %--------------------------------------------------
 %	@Mohammed
 %	Affichage du plateau d'un jeu reçu
@@ -5,7 +7,7 @@
 % 	PN correspond à la liste des pions noirs
 % 	PB correspond à la liste des pions blancs
 
-	display(P) :- write('	A B C D E F G H\n1	'), display_elem(-4, 4, P).
+	display([PN, PB]) :- write('   A B C D E F G H\n1  '), display_elem(-4, 4, [PN, PB]).
 	
 %--------------------------------------------------
 
@@ -13,22 +15,25 @@
 %--------------------------------------------------
 %	@Mohammed
 %	Retourne en arguments N1 et N la position des pions à afficher
+%	param1 : numéro de la colonne 
+%	param1 : numéro de la ligne
+%	param3 : liste : [pions noirs, pions blancs] 
 
-	display_elem(4, -4, P) :- !, display_cell([4, -4], P), write('\n\n').
+	display_elem(4, -4, [PN, PB]) :- !, display_cell([4, -4], [PN, PB]), write('\n\n').
 
 	% Si on est en fin de ligne
-	display_elem(4, L, P) :-
-		display_cell([4, L], P), 
+	display_elem(4, L, [PN, PB]) :-
+		display_cell([4, L], [PN, PB]), 
 		write('\n'), 
-		voisin_superieur(L1, L), !, % Si on est est pas à la dernière ligne
-		write('	'),
-		display_elem(-4, L1, P).
+		voisin_superieur(L1, L), !, % On passe à la ligne suivante
+		write('  '),
+		display_elem(-4, L1, [PN, PB]).
 		
 	% Sinon
-	display_elem(C, L, P) :-
-		display_cell([C, L], P), 
-		voisin_superieur(C, C1), 
-		display_elem(C1, L, P).
+	display_elem(C, L, [PN, PB]) :-
+		display_cell([C, L], [PN, PB]), 
+		voisin_superieur(C, C1), % On passe à la colonne suivante
+		display_elem(C1, L, [PN, PB]).
 
 %--------------------------------------------------
 
@@ -41,7 +46,7 @@
 %		Pion noir = x
 %		Pion blanc = o
 %		Case vide = .
-	display_cell(C, PN, PB) :-
+	display_cell(C, [PN, PB]) :-
 		write(' '),
 		(member(C, PN) ->
 			write('x');
