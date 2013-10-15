@@ -5,7 +5,7 @@
 % 	PN correspond à la liste des pions noirs
 % 	PB correspond à la liste des pions blancs
 
-	display([N, PN, PB]) :- N1 is N*(-1), display_output(N1, N, [N, PN, PB]).
+	display(N, PN, PB) :- N1 is N*(-1), display_output(N1, N, [N, PN, PB]).
 
 %--------------------------------------------------
 
