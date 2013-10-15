@@ -5,8 +5,8 @@
 % 	PN correspond à la liste des pions noirs
 % 	PB correspond à la liste des pions blancs
 
-	display([N, PN, PB]) :- N1 is N*(-1), display_output(N1, N, [N, PN, PB]).
-
+	afficher_plateau(P) :- write('	A B C D E F G H\n1	'), display_elem(-4, 4, P).
+	
 %--------------------------------------------------
 
 
@@ -14,24 +14,21 @@
 %	@Mohammed
 %	Retourne en arguments N1 et N la position des pions à afficher
 
-	display_output(N, N1, [N, PN, PB]) :- 
-		N1 is N*(-1),
-		!,
-		display_cell([N, N1], PN, PB),
-		write('\n\n').
-	
-	% Réaliser un retour à la ligne à la fin de la ligne
-	display_output(N, L, [N, PN, PB]) :- 
-		display_cell([N, L], PN, PB),
-		write('\n'),
-		voisin_superieur(N, L1, L), !,
-		C1 is N*(-1),
-		display_output(C1, L1, [N, PN, PB]).
-	
-	display_output(C, L, [N, PN, PB]) :- 
-		display_cell([C, L], PN, PB),
-		voisin_superieur(N, C, C1),
-		display_output(C1, L, [N, PN, PB]).
+	display_elem(4, -4, P) :- !, display_cell([4, -4], P), write('\n\n').
+
+	% Si on est en fin de ligne
+	display_elem(4, L, P) :-
+		display_cell([4, L], P), 
+		write('\n'), 
+		voisin_superieur(L1, L), !, % Si on est est pas à la dernière ligne
+		write('	'),
+		display_elem(-4, L1, P).
+		
+	% Sinon
+	display_elem(C, L, P) :-
+		display_cell([C, L], P), 
+		voisin_superieur(C, C1), 
+		display_elem(C1, L, P).
 
 %--------------------------------------------------
 
@@ -44,7 +41,6 @@
 %		Pion noir = x
 %		Pion blanc = o
 %		Case vide = .
-
 	display_cell(C, PN, PB) :-
 		write(' '),
 		(member(C, PN) ->
