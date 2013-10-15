@@ -1,6 +1,5 @@
 :- [regles].
 :- [color].
-
 %--------------------------------------------------
 %	@Mohammed
 %	Affichage du plateau d'un jeu reçu
