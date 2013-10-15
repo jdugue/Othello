@@ -50,8 +50,14 @@ case_voisine([Xd, Yd], nordEst, [Xa, Ya]) :- voisin_superieur(Xd, Xa), voisin_su
 @Joss et Ianic
 renvoie les cases voisines d'une case dans une liste.
 **********************************************************************************************/
-case_voisine_pos( Case , Liste) :-
-	findall( Voisin , case_voisine(Case, Direction, Voisin) , Liste).
+cases_voisines_pos(Case, Liste) :-
+	findall(Voisin, case_voisine(Case, Direction, Voisin), Liste).
+	
+calcul_cases_voisines([Pos], CasesVides) :- cases_voisines_pos(Pos, CasesVides).
+calcul_cases_voisines([T|Q], CasesVides) :-  calcul_cases_voisines(Q, OldVides), cases_voisines_pos(T, NewVides), append(NewVides, OldVides, CasesVides).
+	
+	
+cases_voisines_joueur(Couleur, Plateau, Cases) :- pionsJoueur(Couleur, Plateau, Pions), calcul_cases_voisines(Pions, TempCases), sort(TempCases, Cases).
 
 /***************************************************************************************************************************************
 	Permet de récupérer la couleur de l'adversaire.
