@@ -4,6 +4,6 @@
 :- [ia_random].
 
 jouer(Jeu) :- 
-	initialiser(Plateau),
-	diplay(Plateau),
+	init_plateau(Plateau),
+	display(Plateau),
 	jouer(Jeu).

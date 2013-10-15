@@ -139,3 +139,19 @@ cases_vides([T|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
 
 %------------- fin cases_vides() ------------------
 							
+%---------------
+% sandwich(+Case, +Direction , +Plateau , +Couleur , -Liste)
+% Case : la case vide pour laquelle on veut checker
+% Direction : la direction dans laquelle on check
+% Plateau
+% Couleur : la couleur qu'on veut jouer
+%
+% @Joss et Ianic
+%
+% Quand on se place a une position, renvoie la liste des cases occupées par des pionts de la couleur adverse
+% jusqu'a ce qu'on retrouve un piont de la couleur Couleur, ou renvoie false si on trouve une case vide ou
+% un mur
+
+sandwich(Case , Direction , Plateau , Couleur , Liste) :-
+	case_voisine(Case , Direction , NouvelleCase),
+	joueurDuPion(NouvelleCase , Plateau , CouleurPion) == couleur_adversaire(Couleur , CouleurPion).
