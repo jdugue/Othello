@@ -145,7 +145,9 @@ cases_vides([T|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
 
 %------------- fin cases_vides() ------------------
 
-case_suivante(Case , Direction , Plateau , Couleur , [Case]) :- case_voisine(Case,Direction,NouvCase),joueurDuPion(NouvCase , Plateau , Couleur ).
+case_suivante(Case , Direction , Plateau , Couleur , [Case]) :- 
+	case_voisine(Case,Direction,NouvCase),joueurDuPion(NouvCase , Plateau , Couleur ).
+
 %case_suivante(Case , Direction , Plateau , Couleur , []) :- not(case_voisine(Case , Direction,X)).
 
 case_suivante(Case , Direction , Plateau , Couleur , [Case| CaseSand]) :- 
@@ -170,8 +172,3 @@ sandwich(Case , Direction , Plateau , Couleur , Q) :-
 
 cases_a_retourner(Case,Plateau,Couleur,ARetourner) :- 
 	findall(CasesRetourner,sandwich(Case , Direction , Plateau , Couleur , CasesRetourner),ARetourner).	
-
-applati([T],T).
-applati([T|Q],ListeJolie) :-
-	append(T,ListeJolie,ListeTemp),
-	applati(Q,ListeTemp).					
