@@ -20,6 +20,7 @@ pionsJoueur(b, [_|[PionsJ2]], PionsJ2).
 % @Tanguy
 %
 % Ajoute Liste2 à la suite de Liste1
+% !! la suppression ne marche que si Liste2 est en bout de chaine de Liste 1
 %
 % ex:
 % ? - append([a,b,c],[d],R).
@@ -51,7 +52,7 @@ setPionsJoueur(b,Pions,[J1|[J2]],[J1|[Pions]]).
 % ajoutePion(+Pion,+Couleur,+Plateau,-NewPlateau)
 % @Tanguy
 %
-% Ajoute Pion à la liste des pions du joueur selon sa couleur (Couleur)
+% Ajoute +Pion à la liste des pions du joueur selon sa couleur (+Couleur)
 %
 % ex:
 % ? - ajoutePion([2,1], w, [[[1,1],[-1,-1]],[[1,-1],[-1,1]]], Plateau).
@@ -67,7 +68,7 @@ ajoutePion(Pion, Couleur, Plateau, NewPlateau) :-
 % retirePion(+Pion,+Couleur,+Plateau,-NewPlateau)
 % @Tanguy
 %
-% Retire Pion de la liste des pions du joueur selon sa couleur (Couleur)
+% Retire Pion de la liste des pions du joueur selon sa couleur (+Couleur)
 %
 % ex:
 % ? - retirePion([2,1], w, [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]], Plateau).
@@ -133,7 +134,7 @@ est_vide(Position,[J1|[J2]]) :- not(memberchk(Position,J1)), not(memberchk(Posit
 % cases_vides(+Positions,+Plateau,-Vides)
 % @Tanguy
 %
-% Renvoie la liste des +Positions vides.
+% Renvoie la liste des +Positions qui sont vides dans -Vides.
 %
 % ex:
 % ? - cases_vides([[-2,1],[1,1],[-3,1],[3,3]],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]],X).
