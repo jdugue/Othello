@@ -7,3 +7,6 @@ jouer(Jeu) :-
 	init_plateau(Plateau),
 	display(Plateau),
 	jouer(Jeu).
+
+%jouer(Jeu) :-
+	
