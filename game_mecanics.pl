@@ -41,8 +41,8 @@ append([A|L1],L2,[A|L3]) :- append(L1,L2,L3).
 % ? - setPionsJoueur(w,[a,b,c],[[d,e,f],[g,h,i]], R).
 % > R = [[a,b,c],[g,h,i]]
 
-setPionsJoueur(w,Pions,[J1|[J2]],[Pions|[J2]]). 
-setPionsJoueur(b,Pions,[J1|[J2]],[J1|[Pions]]). 
+setPionsJoueur(w,Pions,[_|[J2]],[Pions|[J2]]). 
+setPionsJoueur(b,Pions,[J1|[_]],[J1|[Pions]]). 
 
 %------------- fin setPionsJoueur() ------------------
 
@@ -89,8 +89,8 @@ retirePion(Pion, Couleur, Plateau, NewPlateau) :-
 % ? - joueurDuPion([1,1], [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]], Couleur).
 % > Couleur = w
 
-joueurDuPion(Pion, [J1|[J2]], w) :- memberchk(Pion, J1).
-joueurDuPion(Pion, [J1|[J2]], b) :- memberchk(Pion, J2).
+joueurDuPion(Pion, [J1|[_]], g) :- memberchk(Pion, J1).
+joueurDuPion(Pion, [_|[J2]], r) :- memberchk(Pion, J2).
 
 %------------- fin joueurDuPion() ------------------
 
@@ -139,14 +139,15 @@ est_vide(Position,[J1|[J2]]) :- not(memberchk(Position,J1)), not(memberchk(Posit
 % ? - cases_vides([[-2,1],[1,1],[-3,1],[3,3]],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]],X).
 %
 cases_vides([Pos],Plateau,[Pos]) :- est_vide(Pos,Plateau).
-cases_vides([Pos],Plateau,[]).
+cases_vides([_],_,[]).
 cases_vides([T|Q],Plateau,[T|Vides]) :- est_vide(T,Plateau), cases_vides(Q,Plateau,Vides).
-cases_vides([T|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
+cases_vides([_|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
 
 %------------- fin cases_vides() ------------------
 
 case_suivante(Case , Direction , Plateau , Couleur , [Case]) :- 
-	case_voisine(Case,Direction,NouvCase),joueurDuPion(NouvCase , Plateau , Couleur ).
+	case_voisine(Case,Direction,NouvCase),
+	joueurDuPion(NouvCase , Plateau , Couleur ).
 
 %case_suivante(Case , Direction , Plateau , Couleur , []) :- not(case_voisine(Case , Direction,X)).
 
@@ -168,7 +169,8 @@ case_suivante(Case , Direction , Plateau , Couleur , [Case| CaseSand]) :-
 % jusqu'a ce qu'on retrouve un pion de la couleur Couleur.
 
 sandwich(Case , Direction , Plateau , Couleur , Q) :-
-	case_suivante(Case , Direction , Plateau , Couleur , [T| Q]).	
+	case_suivante(Case , Direction , Plateau , Couleur , [_| Q]).	
 
 cases_a_retourner(Case,Plateau,Couleur,ARetourner) :- 
-	findall(CasesRetourner,sandwich(Case , Direction , Plateau , Couleur , CasesRetourner),ARetourner).	
+	findall(CasesRetourner,sandwich(Case , _ , Plateau , Couleur , CasesRetourner),ARetourner).
+

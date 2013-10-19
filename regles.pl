@@ -67,7 +67,7 @@ case_voisine([Xd, Yd], nordEst, [Xa, Ya]) :- voisin_superieur(Xd, Xa), voisin_su
 % > Liste = [[2, 1], [2, -1], [1, -1], [-1, -1], [-1, 1], [-1, 2], [1, 2], [2, 2]]
 
 cases_voisines_pos(Case, Liste) :-
-	findall(Voisin, case_voisine(Case, Direction, Voisin), Liste).
+	findall(Voisin, case_voisine(Case, _, Voisin), Liste).
 	
 %----------- fin cases_voisines_pos() -------------
 
@@ -134,9 +134,9 @@ est_vide(Position,[J1|[J2]]) :- not(memberchk(Position,J1)), not(memberchk(Posit
 % > X = [[-2, 1], [-3, 1], [3, 3]]
 
 calcul_cases_vides([Pos],Plateau,[Pos]) :- est_vide(Pos,Plateau).
-calcul_cases_vides([Pos],Plateau,[]).
+calcul_cases_vides([_],_,[]).
 calcul_cases_vides([T|Q],Plateau,[T|Vides]) :- est_vide(T,Plateau), calcul_cases_vides(Q,Plateau,Vides).
-calcul_cases_vides([T|Q],Plateau,Vides) :- calcul_cases_vides(Q,Plateau,Vides).
+calcul_cases_vides([_|Q],Plateau,Vides) :- calcul_cases_vides(Q,Plateau,Vides).
 
 %------------- fin calcul_cases_vides() -----------
 
@@ -182,8 +182,8 @@ coups_legaux(Couleur, Plateau, Coups) :-
 % ? - couleur_adversaire(b, X).
 % > X = w
 
-couleur_adversaire(b, w).
-couleur_adversaire(w, b).
+couleur_adversaire(r, g).
+couleur_adversaire(g, r).
 
 %---------- fin couleur_adversaire() --------------
 
