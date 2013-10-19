@@ -11,7 +11,7 @@ faux_plateau([[[1, -3],[2,-2],[3,-2]], [[1, -4],[4,-2]]]).
 % voisin_superieur(+X, -Y) OU voisin_superieur(-X, +Y)
 % @Joss
 %
-% Renvoie la valeur de l'indice superieur(resp. inferieur) à celui passé en argument.
+% Renvoie la valeur de l'indice superieur(resp. inferieur) ˆ celui passŽ en argument.
 %
 % ex:
 % ? - voisin_superieur(1, Y).
@@ -32,7 +32,7 @@ voisin_superieur(3, 4).
 % case_voisine(+Case, +Direction, -CaseVoisine) OU case_voisine(+Case, -Direction, -CaseVoisine)
 % @Joss
 %
-% Renvoie la case voisine à Case suivant Direction. La Direction est un des points cardinaux (N, N-E, E, S-E, S, S-O, O, N-O).
+% Renvoie la case voisine ˆ Case suivant Direction. La Direction est un des points cardinaux (N, N-E, E, S-E, S, S-O, O, N-O).
 % OU
 % Renvoie toutes les cases voisines de Case.
 %
@@ -60,7 +60,7 @@ case_voisine([Xd, Yd], nordEst, [Xa, Ya]) :- voisin_superieur(Xd, Xa), voisin_su
 % cases_voisines_pos(+Case, -Liste)
 % @Joss_et_Ianic
 %
-% Retourne toutes les cases adjacentes à Case.
+% Retourne toutes les cases adjacentes ˆ Case.
 %
 % ex:
 % ? - cases_voisines_pos([1,1], Liste).
