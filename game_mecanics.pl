@@ -179,6 +179,16 @@ valide_case_suivante(Case , Direction , Plateau , Couleur) :-
 	couleur_adversaire(Couleur,CouleurAdv),
 	joueurDuPion(CaseVoisine , Plateau , CouleurAdv ).
 	
+check_sandwich(Case, Direction, Plateau, Couleur) :-
+	case_voisine(Case, Direction, Voisine),
+	joueurDuPion(Voisine, Plateau, Couleur).
+	
+check_sandwich(Case, Direction, Plateau, Couleur) :-
+	valide_case_suivante(Case, Direction, Plateau, Couleur),
+	case_voisine(Case, Direction, Voisine),
+	check_sandwich(Voisine, Direction, Plateau, Couleur).
+	
+	
 
 	
 %---------------
