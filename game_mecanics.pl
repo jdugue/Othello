@@ -9,8 +9,8 @@
 % ? - pionsJoueur(w, [[[1,1],[-1,-1]],[[1,-1],[-1,1]]], Pions).
 % > Pions = [[1,1],[-1,-1]]
 
-pionsJoueur(w, [PionsJ1|[_]], PionsJ1).
-pionsJoueur(b, [_|[PionsJ2]], PionsJ2).
+pionsJoueur(g, [PionsJ1|[_]], PionsJ1).
+pionsJoueur(r, [_|[PionsJ2]], PionsJ2).
 
 %------------- fin pionsJoueur() ------------------
 
@@ -42,8 +42,8 @@ append([A|L1],L2,[A|L3]) :- append(L1,L2,L3).
 % ? - setPionsJoueur(w,[a,b,c],[[d,e,f],[g,h,i]], R).
 % > R = [[a,b,c],[g,h,i]]
 
-setPionsJoueur(w,Pions,[_|[J2]],[Pions|[J2]]). 
-setPionsJoueur(b,Pions,[J1|[_]],[J1|[Pions]]). 
+setPionsJoueur(g,Pions,[_|[J2]],[Pions|[J2]]). 
+setPionsJoueur(r,Pions,[J1|[_]],[J1|[Pions]]). 
 
 %------------- fin setPionsJoueur() ------------------
 
@@ -114,6 +114,10 @@ retourne(P,Plateau,NewPlateau) :-
 	ajoutePion(P, Adversaire, Plateau2, NewPlateau). 
 
 %------------- fin retourne() ------------------
+retourne_all([],_,_).
+retourne_all([T|Q], Plateau ,NewPlateau) :-
+	retourne(T,Plateau ,PlateauTemp),
+	retourne_all(Q,PlateauTemp ,NewPlateau).
 
 %--------------------------------------------------
 % est_vide(+Position,+Plateau)
@@ -161,7 +165,7 @@ depile([T|Q], R) :- depile(Q, R2), append(R2, T, R).
 
 %------------- fin depile() ------------------
 
-case_suivante(Case , Direction , Plateau , Couleur , [Case]) :- 
+/*case_suivante(Case , Direction , Plateau , Couleur , [Case]) :- 
 	case_voisine(Case,Direction,NouvCase),
 	joueurDuPion(NouvCase , Plateau , Couleur ).
 
@@ -170,7 +174,7 @@ case_suivante(Case , Direction , Plateau , Couleur , [Case]) :-
 case_suivante(Case , Direction , Plateau , Couleur , [Case| CaseSand]) :- 
 	case_voisine(Case, Direction , CaseVoisine), 
 	not(est_vide(CaseVoisine , Plateau)),
-	case_suivante(CaseVoisine , Direction , Plateau , Couleur , CaseSand).
+	case_suivante(CaseVoisine , Direction , Plateau , Couleur , CaseSand).*/
 
 
 valide_case_suivante(Case , Direction , Plateau , Couleur) :-
@@ -182,7 +186,7 @@ valide_case_suivante(Case , Direction , Plateau , Couleur) :-
 	
 	
 %---------------------------------------
-% sandwich(+Case, +Direction , +Plateau , +Couleur , -Liste)
+% check_sandwich(+Case, +Direction , +Plateau , +Couleur , -Liste)
 % Case : la case vide pour laquelle on veut checker
 % Direction : la direction dans laquelle on check
 % Plateau
