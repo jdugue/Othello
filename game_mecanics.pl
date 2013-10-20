@@ -173,11 +173,13 @@ case_suivante(Case , Direction , Plateau , Couleur , [Case| CaseSand]) :-
 	case_suivante(CaseVoisine , Direction , Plateau , Couleur , CaseSand).
 
 
-valid_case_suivante(Case , Direction , Plateau , Couleur) :-
+valide_case_suivante(Case , Direction , Plateau , Couleur) :-
 	case_voisine(Case, Direction , CaseVoisine),
 	not(est_vide(CaseVoisine , Plateau)),
 	couleur_adversaire(Couleur,CouleurAdv),
 	joueurDuPion(CaseVoisine , Plateau , CouleurAdv ).
+	
+
 	
 %---------------
 % sandwich(+Case, +Direction , +Plateau , +Couleur , -Liste)
