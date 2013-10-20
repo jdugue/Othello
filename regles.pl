@@ -157,6 +157,19 @@ cases_vides(Positions,Plateau,ListeCases) :- findall(Vides, calcul_cases_vides(P
 
 
 %--------------------------------------------------
+% cases_qui_sandwich(+Positions, +Couleur, +Plateau, -Vides)
+% @Tanguy
+%
+% Renvoie le premier element de calcul_cases_vides()
+%
+%
+
+cases_qui_sandwich(Positions,Plateau,ListeCases) :- findall(Vides, calcul_cases_vides(Positions,Plateau,Vides), [ListeCases|_]).
+
+%------------- fin cases_qui_sandwich() ------------------
+
+
+%--------------------------------------------------
 % coups_legaux(Couleur, Plateau, Coups)
 % @Tanguy_et_Thomas
 %
@@ -167,7 +180,9 @@ cases_vides(Positions,Plateau,ListeCases) :- findall(Vides, calcul_cases_vides(P
 % > Coups =
 
 coups_legaux(Couleur, Plateau, Coups) :-
-	couleur_adversaire(Couleur,Adversaire), cases_voisines_joueur(Adversaire, Plateau, Voisines), cases_vides(Voisines, Plateau, Coups).
+	couleur_adversaire(Couleur,Adversaire),
+	cases_voisines_joueur(Adversaire, Plateau, Voisines),
+	cases_vides(Voisines, Plateau, Coups).
 	
 %------------- fin coups_legaux() -----------------
 
