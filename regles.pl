@@ -208,8 +208,12 @@ cases_qui_sandwich(Positions, Couleur, Plateau, ListeCasesOK) :-
 
 coups_legaux(Couleur, Plateau, Coups) :-
 	couleur_adversaire(Couleur,Adversaire),
+	!,
 	cases_voisines_joueur(Adversaire, Plateau, Voisines),
-	cases_vides(Voisines, Plateau, Coups).
+	!,
+	cases_vides(Voisines, Plateau, Vides),
+	!,
+	cases_qui_sandwich(Vides, Couleur, Plateau, Coups).
 	
 %------------- fin coups_legaux() -----------------
 

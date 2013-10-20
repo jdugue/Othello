@@ -192,15 +192,19 @@ valide_case_suivante(Case , Direction , Plateau , Couleur) :-
 %
 % Renvoit true si un sandwich est possible pour une +Case donnée.
 % 
-	
-check_sandwich(Case, Direction, Plateau, Couleur) :-
-	case_voisine(Case, Direction, Voisine),
-	joueurDuPion(Voisine, Plateau, Couleur).
-	
 check_sandwich(Case, Direction, Plateau, Couleur) :-
 	valide_case_suivante(Case, Direction, Plateau, Couleur),
 	case_voisine(Case, Direction, Voisine),
-	check_sandwich(Voisine, Direction, Plateau, Couleur).
+	calcul_check_sandwich(Voisine, Direction, Plateau, Couleur).
+
+calcul_check_sandwich(Case, Direction, Plateau, Couleur) :-
+	case_voisine(Case, Direction, Voisine),
+	joueurDuPion(Voisine, Plateau, Couleur).
+	
+calcul_check_sandwich(Case, Direction, Plateau, Couleur) :-
+	valide_case_suivante(Case, Direction, Plateau, Couleur),
+	case_voisine(Case, Direction, Voisine),
+	calcul_check_sandwich(Voisine, Direction, Plateau, Couleur).
 	
 %--------- fin check_sandwich() -------
 	
