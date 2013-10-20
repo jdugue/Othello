@@ -3,15 +3,16 @@
 :- [game_mecanics].
 :- [ia_random].
 
-jouer(Jeu) :- 
+playAll(Jeu) :- 
 	init_plateau(Plateau),
 	display(Plateau),
-	jouer(Jeu).
+	jouer(Plateau,r,NewPlateau),
+	display(NewPlateau).
 
-jouer(Plateau,Couleur) :-
+jouer(Plateau,Couleur,NewPlateau) :-
 	coups_legaux(Couleur, Plateau, Coups),
-	choix_move(Coups,Choix).
-	%sandwich(),
-	%retourne(),
-	%ajoutePion(). %On ajoute le pion que l'on a décidé de jouer
+	choix_move(Coups,Choix),
+	cases_a_retourner(Choix,Plateau,Couleur,ARetourner),
+	retourne_all(ARetourner,Plateau,PlateauTemp),
+	ajoutePion(Choix,Couleur,PlateauTemp,NewPlateau). %On ajoute le pion que l'on a décidé de jouer
 	

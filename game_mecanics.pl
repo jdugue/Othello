@@ -115,7 +115,15 @@ retourne(P,Plateau,NewPlateau) :-
 
 %------------- fin retourne() ------------------
 
-
+%--------------------------------------------------
+% retourne_all(+ListeARetourner,+Plateau,-NewPlateau)
+% @Mael
+%
+% Chaque élément de ListeARetourner est retourné, on renvoie le nouveau plateau ainsi formé
+%
+% ex:
+% ? - retourne_all([[1,1],[-1,-1]], [[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]], Plateau).
+%
 retourne_all([],_,NewPlateau).
 retourne_all([T|Q], Plateau ,NewPlateau) :-
 	retourne(T,Plateau ,PlateauTemp),
