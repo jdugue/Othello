@@ -114,7 +114,7 @@ retourne(P,Plateau,NewPlateau) :-
 	ajoutePion(P, Adversaire, Plateau2, NewPlateau). 
 
 %------------- fin retourne() ------------------
-retourne_all([],_,_).
+retourne_all([],_,NewPlateau).
 retourne_all([T|Q], Plateau ,NewPlateau) :-
 	retourne(T,Plateau ,PlateauTemp),
 	retourne_all(Q,PlateauTemp ,NewPlateau).
@@ -170,8 +170,6 @@ valide_case_suivante(Case , Direction , Plateau , Couleur) :-
 	not(est_vide(CaseVoisine , Plateau)),
 	couleur_adversaire(Couleur,CouleurAdv),
 	joueurDuPion(CaseVoisine , Plateau , CouleurAdv ).
-	
-	
 	
 %---------------------------------------
 % check_sandwich(+Case, +Direction , +Plateau , +Couleur , -Liste)
