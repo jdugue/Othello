@@ -146,6 +146,21 @@ cases_vides([_|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
 
 %------------- fin cases_vides() ------------------
 
+%--------------------------------------------------
+% depile(+ListeDeListe,-Liste)
+% @Tanguy
+%
+% Prend une +ListeDeListe de profondeur N et retourne une -Liste de profondeur N-1
+%
+% ex:
+% ? - depile([[a,b],[c,d],[d,e]],R).
+% R = [d, e, c, d, a, b]
+
+depile([T], T).
+depile([T|Q], R) :- depile(Q, R2), append(R2, T, R).
+
+%------------- fin depile() ------------------
+
 case_suivante(Case , Direction , Plateau , Couleur , [Case]) :- 
 	case_voisine(Case,Direction,NouvCase),
 	joueurDuPion(NouvCase , Plateau , Couleur ).
@@ -174,4 +189,5 @@ sandwich(Case , Direction , Plateau , Couleur , Q) :-
 
 cases_a_retourner(Case,Plateau,Couleur,ARetourner) :- 
 	findall(CasesRetourner,sandwich(Case , _ , Plateau , Couleur , CasesRetourner),ARetourner).
+	
 
