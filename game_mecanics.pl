@@ -172,6 +172,13 @@ case_suivante(Case , Direction , Plateau , Couleur , [Case| CaseSand]) :-
 	not(est_vide(CaseVoisine , Plateau)),
 	case_suivante(CaseVoisine , Direction , Plateau , Couleur , CaseSand).
 
+
+valid_case_suivante(Case , Direction , Plateau , Couleur) :-
+	case_voisine(Case, Direction , CaseVoisine),
+	not(est_vide(CaseVoisine , Plateau)),
+	couleur_adversaire(Couleur,CouleurAdv),
+	joueurDuPion(CaseVoisine , Plateau , CouleurAdv ).
+	
 %---------------
 % sandwich(+Case, +Direction , +Plateau , +Couleur , -Liste)
 % Case : la case vide pour laquelle on veut checker
