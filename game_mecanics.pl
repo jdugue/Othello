@@ -174,4 +174,7 @@ sandwich(Case , Direction , Plateau , Couleur , Q) :-
 
 cases_a_retourner(Case,Plateau,Couleur,ARetourner) :- 
 	findall(CasesRetourner,sandwich(Case , _ , Plateau , Couleur , CasesRetourner),ARetourner).
+	
+depile([T], T).
+depile([T|Q], R) :- depile(Q, R2), append(R2, T, R).
 
