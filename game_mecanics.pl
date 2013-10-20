@@ -165,18 +165,6 @@ depile([T|Q], R) :- depile(Q, R2), append(R2, T, R).
 
 %------------- fin depile() ------------------
 
-/*case_suivante(Case , Direction , Plateau , Couleur , [Case]) :- 
-	case_voisine(Case,Direction,NouvCase),
-	joueurDuPion(NouvCase , Plateau , Couleur ).
-
-%case_suivante(Case , Direction , Plateau , Couleur , []) :- not(case_voisine(Case , Direction,X)).
-
-case_suivante(Case , Direction , Plateau , Couleur , [Case| CaseSand]) :- 
-	case_voisine(Case, Direction , CaseVoisine), 
-	not(est_vide(CaseVoisine , Plateau)),
-	case_suivante(CaseVoisine , Direction , Plateau , Couleur , CaseSand).*/
-
-
 valide_case_suivante(Case , Direction , Plateau , Couleur) :-
 	case_voisine(Case, Direction , CaseVoisine),
 	not(est_vide(CaseVoisine , Plateau)),
@@ -209,22 +197,29 @@ check_sandwich(Case, Direction, Plateau, Couleur) :-
 %--------- fin check_sandwich() -------
 	
 	
+%---------------------------------------
+% sandwich(+Case, +Direction , +Plateau , +Couleur , -Liste)
+% @Tanguy & Mael
+%
+% Renvoie les  cases prises en sandwich depuis +Case dans
+% dans une +Direction
+% 
+
+sandwich(Case, Direction, Plateau, Couleur, CasesSandwich) :-
+	temp_sandwich(Case, Direction, Plateau, Couleur, [_|CasesSandwich]).
+
+temp_sandwich(Case, Direction, Plateau, Couleur, [Case]) :- 
+	case_voisine(Case, Direction, Voisine),
+	joueurDuPion(Voisine, Plateau, Couleur).
+
+temp_sandwich(Case, Direction, Plateau, Couleur, [Case| CaseSand]) :- 
+	case_voisine(Case, Direction, Voisine), 
+	not(est_vide(Voisine, Plateau)),
+	temp_sandwich(Voisine, Direction, Plateau, Couleur, CaseSand).
+	
+%--------- fin sandwich() -------
 
 	
-%---------------
-% sandwich(+Case, +Direction , +Plateau , +Couleur , -Liste)
-% Case : la case vide pour laquelle on veut checker
-% Direction : la direction dans laquelle on check
-% Plateau
-% Couleur : la couleur qu'on veut jouer
-% Liste : La liste des pions à retourner
-% @Joss et Ianic
-%
-% Quand on se place a une position, renvoie la liste des cases occupées par des pions de la couleur adverse
-% jusqu'a ce qu'on retrouve un pion de la couleur Couleur.
-
-sandwich(Case , Direction , Plateau , Couleur , Q) :-
-	case_suivante(Case , Direction , Plateau , Couleur , [_| Q]).	
 
 cases_a_retourner(Case,Plateau,Couleur,ARetourner) :- 
 	findall(CasesRetourner,sandwich(Case , _ , Plateau , Couleur , CasesRetourner),ARetourner).
