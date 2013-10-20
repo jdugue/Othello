@@ -182,7 +182,7 @@ valide_case_suivante(Case , Direction , Plateau , Couleur) :-
 	joueurDuPion(CaseVoisine , Plateau , CouleurAdv ).
 	
 %---------------------------------------
-% check_sandwich(+Case, +Direction , +Plateau , +Couleur , -Liste)
+% check_sandwich(+Case, +Direction , +Plateau , +Couleur)
 % Case : la case vide pour laquelle on veut checker
 % Direction : la direction dans laquelle on check
 % Plateau

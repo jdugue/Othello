@@ -168,7 +168,7 @@ cases_vides(Positions,Plateau,ListeCases) :- findall(Vides, calcul_cases_vides(P
 % Renvoie dans -CasesOK les cases qui permettent un sandwich parmis les cases +Positions
 %
 %
-
+/******
 calcul_cases_qui_sandwich([Case], Couleur, Plateau, [Case]) :- 
 	check_sandwich(Case, _, Plateau, Couleur).
 calcul_cases_qui_sandwich([_], _, _, []).
@@ -178,6 +178,11 @@ calcul_cases_qui_sandwich([T|Q], Couleur, Plateau, [T|CasesOK]) :-
 	calcul_cases_qui_sandwich(Q, Couleur, Plateau, CasesOK).
 calcul_cases_qui_sandwich([_|Q], _, Plateau, CasesOK) :-
 	calcul_cases_qui_sandwich(Q, _, Plateau, CasesOK).
+*****/
+	
+calcul_cases_qui_sandwich(Cases, Couleur, Plateau, UneCaseOK):-
+	memberchk(UneCaseOK, Cases),
+	check_sandwich(UneCaseOK, _, Plateau, Couleur).
 
 %------------- fin calcul_cases_qui_sandwich() ------------------
 
@@ -191,7 +196,7 @@ calcul_cases_qui_sandwich([_|Q], _, Plateau, CasesOK) :-
 %
 
 cases_qui_sandwich(Positions, Couleur, Plateau, ListeCasesOK) :-
-	findall(CasesOK, calcul_cases_qui_sandwich(Positions, Couleur, Plateau, CasesOK), [ListeCasesOK|_]).
+	findall(CasesOK, calcul_cases_qui_sandwich(Positions, Couleur, Plateau, CasesOK), ListeCasesOK).
 
 %------------- fin cases_qui_sandwich() ------------------
 
