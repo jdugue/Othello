@@ -115,7 +115,8 @@ retourne(P,Plateau,NewPlateau) :-
 
 %------------- fin retourne() ------------------
 
-retourne_all([T],Plateau,NewPlateau):-retourne(T,Plateau,NewPlateau).
+
+retourne_all([],_,NewPlateau).
 retourne_all([T|Q], Plateau ,NewPlateau) :-
 	retourne(T,Plateau ,PlateauTemp),
 	retourne_all(Q,PlateauTemp ,NewPlateau).
