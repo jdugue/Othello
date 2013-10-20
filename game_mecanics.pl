@@ -179,6 +179,20 @@ valide_case_suivante(Case , Direction , Plateau , Couleur) :-
 	couleur_adversaire(Couleur,CouleurAdv),
 	joueurDuPion(CaseVoisine , Plateau , CouleurAdv ).
 	
+	
+	
+%---------------------------------------
+% sandwich(+Case, +Direction , +Plateau , +Couleur , -Liste)
+% Case : la case vide pour laquelle on veut checker
+% Direction : la direction dans laquelle on check
+% Plateau
+% Couleur : la couleur qu'on veut jouer
+% Liste : La liste des pions à retourner
+% @Tanguy
+%
+% Renvoit true si un sandwich est possible pour une +Case donnée.
+% 
+	
 check_sandwich(Case, Direction, Plateau, Couleur) :-
 	case_voisine(Case, Direction, Voisine),
 	joueurDuPion(Voisine, Plateau, Couleur).
@@ -187,6 +201,8 @@ check_sandwich(Case, Direction, Plateau, Couleur) :-
 	valide_case_suivante(Case, Direction, Plateau, Couleur),
 	case_voisine(Case, Direction, Voisine),
 	check_sandwich(Voisine, Direction, Plateau, Couleur).
+	
+%--------- fin check_sandwich() -------
 	
 	
 
