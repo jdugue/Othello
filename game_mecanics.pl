@@ -215,11 +215,23 @@ temp_sandwich(Case, Direction, Plateau, Couleur, [Case| CaseSand]) :-
 	not(est_vide(Voisine, Plateau)),
 	temp_sandwich(Voisine, Direction, Plateau, Couleur, CaseSand).
 	
-%--------- fin sandwich() -------
+%--------- fin sandwich() ---------------
+	
+	
+%---------------------------------------
+% cases_a_retourner(+Case, +Plateau , +Couleur , -Liste)
+% @Tanguy 
+%
+% Renvoie les cases à retourner (-Liste) si on joue en +Case
+% 
+
+cases_a_retourner(Case,Plateau,Couleur,ARetourner) :- 
+	findall(CasesRetourner,sandwich(Case , _ , Plateau , Couleur , CasesRetourner),ARetournerTemp),
+	depile(ARetournerTemp, ARetourner).
+	
+%--------- fin sandwich() ---------------
 
 	
 
-cases_a_retourner(Case,Plateau,Couleur,ARetourner) :- 
-	findall(CasesRetourner,sandwich(Case , _ , Plateau , Couleur , CasesRetourner),ARetourner).
 	
 
