@@ -220,6 +220,12 @@ coups_legaux(Couleur, Plateau, Coups) :-
 	!,
 	cases_qui_sandwich(Vides, Couleur, Plateau, Coups).
 	
+coups_legaux2(Couleur, Plateau, Coups) :-
+	couleur_adversaire(Couleur,Adversaire),!,
+	cases_voisines_joueur(Adversaire, Plateau, Voisines),!,
+	cases_vides(Voisines, Plateau, Coups).
+	
+	
 %------------- fin coups_legaux() -----------------
 
 

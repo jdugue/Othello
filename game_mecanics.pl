@@ -142,12 +142,12 @@ retourne_all([T|Q], Plateau ,NewPlateau) :-
 % ? - est_vide([1,1],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]).
 %
 
-est_vide(Position,[J1|[J2]]) :- not(memberchk(Position,J1)), not(memberchk(Position,J2)).
+est_vide(Position,[J1|[J2]]) :- not(member(Position,J1)), not(member(Position,J2)).
 
 %------------- fin est_vide() ------------------
 
 %--------------------------------------------------
-% cases_vides(+Positions,+Plateau,-Vides)
+% all_cases_vides(+Positions,+Plateau,-Vides)
 % @Tanguy
 %
 % Renvoie la liste des +Positions qui sont vides dans -Vides.
@@ -155,10 +155,20 @@ est_vide(Position,[J1|[J2]]) :- not(memberchk(Position,J1)), not(memberchk(Posit
 % ex:
 % ? - cases_vides([[-2,1],[1,1],[-3,1],[3,3]],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]],X).
 %
+/**
 cases_vides([Pos],Plateau,[Pos]) :- est_vide(Pos,Plateau).
 cases_vides([_],_,[]).
 cases_vides([T|Q],Plateau,[T|Vides]) :- est_vide(T,Plateau), cases_vides(Q,Plateau,Vides).
 cases_vides([_|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
+**/
+
+cases_vides(ListeCases, Plateau, Case) :-
+	member(Case, ListeCases),
+	est_vide(Case, Plateau).
+
+all_cases_vides(ListeCases, Plateau, ListeCasesVides) :-
+	findall(Case, cases_vides(ListeCases, Plateau, Case), ListeCasesVides).
+	
 
 %------------- fin cases_vides() ------------------
 
