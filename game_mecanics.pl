@@ -128,6 +128,8 @@ retourne_all([],_,NewPlateau).
 retourne_all([T|Q], Plateau ,NewPlateau) :-
 	retourne(T,Plateau ,PlateauTemp),
 	retourne_all(Q,PlateauTemp ,NewPlateau).
+	
+%------------- fin retourne_all() -------------------
 
 %--------------------------------------------------
 % est_vide(+Position,+Plateau)
