@@ -8,6 +8,7 @@ playAll(Jeu) :-
 	display(Plateau),
 	jouer(Plateau,r).
 
+jouer(Plateau,Couleur) :- 
 jouer(Plateau,Couleur) :-
 	coups_legaux(Couleur, Plateau, Coups),
 	choix_move(Coups,Choix),
