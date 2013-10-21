@@ -165,7 +165,7 @@ cases_vides(Positions,Plateau,ListeCases) :- findall(Vides, calcul_cases_vides(P
 % calcul_cases_qui_sandwich(+Positions, +Couleur, +Plateau, -CasesOK)
 % @Tanguy
 %
-% Renvoie dans -CasesOK les cases qui permettent un sandwich parmis les cases +Positions
+% Renvoie -UneCasesOK parmis +Positions qui permet un sandwich
 %
 %
 /******
@@ -181,7 +181,7 @@ calcul_cases_qui_sandwich([_|Q], _, Plateau, CasesOK) :-
 *****/
 	
 calcul_cases_qui_sandwich(Cases, Couleur, Plateau, UneCaseOK):-
-	memberchk(UneCaseOK, Cases),
+	member(UneCaseOK, Cases),
 	check_sandwich(UneCaseOK, _, Plateau, Couleur).
 
 %------------- fin calcul_cases_qui_sandwich() ------------------
@@ -211,19 +211,12 @@ cases_qui_sandwich(Positions, Couleur, Plateau, ListeCasesOK) :-
 % ? - coups_legaux(b, [[[1,1],[-1,-1]],[[1,-1],[-1,1]]], Coups).
 % > Coups =
 
+	
 coups_legaux(Couleur, Plateau, Coups) :-
 	couleur_adversaire(Couleur,Adversaire),
-	!,
 	cases_voisines_joueur(Adversaire, Plateau, Voisines),
-	!,
-	cases_vides(Voisines, Plateau, Vides),
-	!,
+	all_cases_vides(Voisines, Plateau, Vides),
 	cases_qui_sandwich(Vides, Couleur, Plateau, Coups).
-	
-coups_legaux2(Couleur, Plateau, Coups) :-
-	couleur_adversaire(Couleur,Adversaire),!,
-	cases_voisines_joueur(Adversaire, Plateau, Voisines),!,
-	cases_vides(Voisines, Plateau, Coups).
 	
 	
 %------------- fin coups_legaux() -----------------
