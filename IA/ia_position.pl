@@ -33,3 +33,13 @@ valeur_case(Case,Valeur) :- member(Case,[[-2,2],[2,2],[2,-2],[-2,-2]]),valeurs(u
 valeur_case(Case,Valeur) :- member(Case,[[-1,2],[1,2],[-1,-1],[-1,1],[-2,1],[-2,-1],[2,1],[2,-1]]),valeurs(deux,Valeur).
 valeur_case(Case,Valeur) :- member(Case,[[-1,1],[1,-1],[1,1],[-1,-1]]),valeurs(seize,Valeur).
 
+calcul(T|Q],Best,Choix):-
+	valeur_case(T,Val),
+
+.
+choix_move([T|Q],Choix) :-
+	valeur_case(T,Val),
+	
+		
+	
+
