@@ -4,14 +4,18 @@
 	Par exemple, la case [-4, 4] est la case en haut à gauche du plateau et [4, 4] celle en haut à droite.
 ***************************************************************************************************************************************/
 init_plateau([[[1, 1], [-1, -1]], [[-1, 1], [1, -1]]]).
+<<<<<<< HEAD
 faux_plateau([[[1, -3],[2,-2],[3,-2] , [1,-1] , [1,1]], [[1, -4],[4,-2] , [1,2]]]).
+=======
+faux_plateau([[[1, 1], [-1, -1]], [[-1, 1], [1, -1],[2,-1]]]).
+>>>>>>> 04e0266c0d4088e3ed274d1b4d878cb36af38168
 
 
 %--------------------------------------------------
 % voisin_superieur(+X, -Y) OU voisin_superieur(-X, +Y)
 % @Joss
 %
-% Renvoie la valeur de l'indice superieur(resp. inferieur) à celui passé en argument.
+% Renvoie la valeur de l'indice superieur(resp. inferieur) ˆ celui passŽ en argument.
 %
 % ex:
 % ? - voisin_superieur(1, Y).
@@ -32,7 +36,7 @@ voisin_superieur(3, 4).
 % case_voisine(+Case, +Direction, -CaseVoisine) OU case_voisine(+Case, -Direction, -CaseVoisine)
 % @Joss
 %
-% Renvoie la case voisine à Case suivant Direction. La Direction est un des points cardinaux (N, N-E, E, S-E, S, S-O, O, N-O).
+% Renvoie la case voisine ˆ Case suivant Direction. La Direction est un des points cardinaux (N, N-E, E, S-E, S, S-O, O, N-O).
 % OU
 % Renvoie toutes les cases voisines de Case.
 %
@@ -60,14 +64,14 @@ case_voisine([Xd, Yd], nordEst, [Xa, Ya]) :- voisin_superieur(Xd, Xa), voisin_su
 % cases_voisines_pos(+Case, -Liste)
 % @Joss_et_Ianic
 %
-% Retourne toutes les cases adjacentes à Case.
+% Retourne toutes les cases adjacentes ˆ Case.
 %
 % ex:
 % ? - cases_voisines_pos([1,1], Liste).
 % > Liste = [[2, 1], [2, -1], [1, -1], [-1, -1], [-1, 1], [-1, 2], [1, 2], [2, 2]]
 
 cases_voisines_pos(Case, Liste) :-
-	findall(Voisin, case_voisine(Case, Direction, Voisin), Liste).
+	findall(Voisin, case_voisine(Case, _, Voisin), Liste).
 	
 %----------- fin cases_voisines_pos() -------------
 
@@ -134,9 +138,14 @@ est_vide(Position,[J1|[J2]]) :- not(memberchk(Position,J1)), not(memberchk(Posit
 % > X = [[-2, 1], [-3, 1], [3, 3]]
 
 calcul_cases_vides([Pos],Plateau,[Pos]) :- est_vide(Pos,Plateau).
-calcul_cases_vides([Pos],Plateau,[]).
-calcul_cases_vides([T|Q],Plateau,[T|Vides]) :- est_vide(T,Plateau), calcul_cases_vides(Q,Plateau,Vides).
-calcul_cases_vides([T|Q],Plateau,Vides) :- calcul_cases_vides(Q,Plateau,Vides).
+calcul_cases_vides([_],_,[]).
+
+
+calcul_cases_vides([T|Q],Plateau,[T|Vides]) :- 
+	est_vide(T,Plateau),
+	calcul_cases_vides(Q,Plateau,Vides).
+calcul_cases_vides([_|Q],Plateau,Vides) :- 
+	calcul_cases_vides(Q,Plateau,Vides).
 
 %------------- fin calcul_cases_vides() -----------
 
@@ -157,6 +166,46 @@ cases_vides(Positions,Plateau,ListeCases) :- findall(Vides, calcul_cases_vides(P
 
 
 %--------------------------------------------------
+% calcul_cases_qui_sandwich(+Positions, +Couleur, +Plateau, -CasesOK)
+% @Tanguy
+%
+% Renvoie -UneCasesOK parmis +Positions qui permet un sandwich
+%
+%
+/******
+calcul_cases_qui_sandwich([Case], Couleur, Plateau, [Case]) :- 
+	check_sandwich(Case, _, Plateau, Couleur).
+calcul_cases_qui_sandwich([_], _, _, []).
+
+calcul_cases_qui_sandwich([T|Q], Couleur, Plateau, [T|CasesOK]) :-
+	check_sandwich(T, _, Plateau, Couleur),
+	calcul_cases_qui_sandwich(Q, Couleur, Plateau, CasesOK).
+calcul_cases_qui_sandwich([_|Q], _, Plateau, CasesOK) :-
+	calcul_cases_qui_sandwich(Q, _, Plateau, CasesOK).
+*****/
+	
+calcul_cases_qui_sandwich(Cases, Couleur, Plateau, UneCaseOK):-
+	member(UneCaseOK, Cases),
+	check_sandwich(UneCaseOK, _, Plateau, Couleur).
+
+%------------- fin calcul_cases_qui_sandwich() ------------------
+
+
+%--------------------------------------------------
+% cases_qui_sandwich(+Positions, +Couleur, +Plateau, -CasesOK)
+% @Tanguy
+%
+% Renvoie dans -CasesOK les cases qui permettent un sandwich parmis les cases +Positions
+%
+%
+
+cases_qui_sandwich(Positions, Couleur, Plateau, ListeCasesOK) :-
+	findall(CasesOK, calcul_cases_qui_sandwich(Positions, Couleur, Plateau, CasesOK), ListeCasesOK).
+
+%------------- fin cases_qui_sandwich() ------------------
+
+
+%--------------------------------------------------
 % coups_legaux(Couleur, Plateau, Coups)
 % @Tanguy_et_Thomas
 %
@@ -166,8 +215,13 @@ cases_vides(Positions,Plateau,ListeCases) :- findall(Vides, calcul_cases_vides(P
 % ? - coups_legaux(b, [[[1,1],[-1,-1]],[[1,-1],[-1,1]]], Coups).
 % > Coups =
 
+	
 coups_legaux(Couleur, Plateau, Coups) :-
-	couleur_adversaire(Couleur,Adversaire), cases_voisines_joueur(Adversaire, Plateau, Voisines), cases_vides(Voisines, Plateau, Coups).
+	couleur_adversaire(Couleur,Adversaire),
+	cases_voisines_joueur(Adversaire, Plateau, Voisines),
+	all_cases_vides(Voisines, Plateau, Vides),
+	cases_qui_sandwich(Vides, Couleur, Plateau, Coups).
+	
 	
 %------------- fin coups_legaux() -----------------
 
@@ -182,44 +236,7 @@ coups_legaux(Couleur, Plateau, Coups) :-
 % ? - couleur_adversaire(b, X).
 % > X = w
 
-couleur_adversaire(b, w).
-couleur_adversaire(w, b).
+couleur_adversaire(r, g).
+couleur_adversaire(g, r).
 
 %---------- fin couleur_adversaire() --------------
-
-/***************************************************************************************************************************************
-	Définit les valeurs des cases, utile pour les algos des IA
-
-	nb de points : 
-	cc : 500
-	mdcc : -250
-	dix : 10
-	mcc : -150
-	trente : 30
-	un : 1
-	deux : 2
-	seize : 16
-***************************************************************************************************************************************/
-
-valeurs(cc,500).
-valeurs(mdcc,-250).
-valeurs(mcc,-150).
-valeurs(dix,10).
-valeurs(trente,30).
-valeurs(nul,0).
-valeurs(un,1).
-valeurs(deux,30).
-valeurs(seize,30).
-
-
-valeur_case(Case,Valeur) :- member(Case,[[1,1],[-1,-1],[-1,1],[1,-1]]),valeurs(cc,Valeur).
-valeur_case(Case,Valeur) :- member(Case,[[-3,4],[-4,3],[3,4],[4,3],[-3,-4],[-4,-3],[3,-4],[4,-3]]),valeurs(mcc,Valeur).
-valeur_case(Case,Valeur) :- member(Case,[[-3,3],[-3,-3],[3,3],[3,-3]]),valeurs(mdcc,Valeur).
-valeur_case(Case,Valeur) :- member(Case,[[-1,4],[1,4],[-1,-4],[1,-4],[-4,1],[-4,-1],[4,1],[4,-1]]),valeurs(dix,Valeur).
-valeur_case(Case,Valeur) :- member(Case,[[-2,4],[2,4],[-2,-4],[2,-4],[-4,2],[-4,-2],[4,2],[4-2]]),valeurs(trente,Valeur).
-valeur_case(Case,Valeur) :- member(Case,[[-2,3],[-1,3],[1,3],[2,3],[-2,-3],[-1,-3],[1,-3],[2,-3],[-3,2],[-3,1],[-3,-1],[-3,-2],[3,2],[3,1],[3,-1],[3,-2]]),valeurs(nul,Valeur).
-valeur_case(Case,Valeur) :- member(Case,[[-2,2],[2,2],[2,-2],[-2,-2]]),valeurs(un,Valeur).
-valeur_case(Case,Valeur) :- member(Case,[[-1,2],[1,2],[-1,-1],[-1,1],[-2,1],[-2,-1],[2,1],[2,-1]]),valeurs(deux,Valeur).
-valeur_case(Case,Valeur) :- member(Case,[[-1,1],[1,-1],[1,1],[-1,-1]]),valeurs(seize,Valeur).
-
-
