@@ -171,4 +171,5 @@ sandwich(Case , Direction , Plateau , Couleur , Q) :-
 	case_suivante(Case , Direction , Plateau , Couleur , [T| Q]).	
 
 cases_a_retourner(Case,Plateau,Couleur,ARetourner) :- 
-	findall(CasesRetourner,sandwich(Case , Direction , Plateau , Couleur , CasesRetourner),ARetourner).	
+	append(sandwich(Case , Direction , Plateau , Couleur , CasesRetourner),[_| ARetourner],ARetourner).
+	%findall(CasesRetourner,sandwich(Case , Direction , Plateau , Couleur , CasesRetourner),ARetourner).	
