@@ -55,3 +55,7 @@ vainqueur(L1,L2) :-
 	L1>L2,
 	write('Green gagne !').
 	
+vainqueur(L1,L2) :-
+	L1==L2,
+	write('Egalité !').	
+	
