@@ -252,9 +252,16 @@ temp_sandwich(Case, Direction, Plateau, Couleur, [Case| CaseSand]) :-
 % 
 
 cases_a_retourner(Case,Plateau,Couleur,ARetourner) :- 
-<<<<<<< HEAD
-	append(sandwich(Case , Direction , Plateau , Couleur , CasesRetourner),[_| ARetourner],ARetourner).
-	%findall(CasesRetourner,sandwich(Case , Direction , Plateau , Couleur , CasesRetourner),ARetourner).	
+	findall(CasesRetourner,sandwich(Case , _ , Plateau , Couleur , CasesRetourner),ARetournerTemp),
+	depile(ARetournerTemp, ARetourner).
+	
+%--------- fin sandwich() ---------------
+
+	
+
+	
+
+, CasesRetourner),ARetourner).	
 =======
 	findall(CasesRetourner,sandwich(Case , _ , Plateau , Couleur , CasesRetourner),ARetournerTemp),
 	depile(ARetournerTemp, ARetourner).

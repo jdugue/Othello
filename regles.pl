@@ -4,11 +4,7 @@
 	Par exemple, la case [-4, 4] est la case en haut à gauche du plateau et [4, 4] celle en haut à droite.
 ***************************************************************************************************************************************/
 init_plateau([[[1, 1], [-1, -1]], [[-1, 1], [1, -1]]]).
-<<<<<<< HEAD
-faux_plateau([[[1, -3],[2,-2],[3,-2] , [1,-1] , [1,1]], [[1, -4],[4,-2] , [1,2]]]).
-=======
 faux_plateau([[[1, 1], [-1, -1]], [[-1, 1], [1, -1],[2,-1]]]).
->>>>>>> 04e0266c0d4088e3ed274d1b4d878cb36af38168
 
 
 %--------------------------------------------------
@@ -232,6 +228,14 @@ coups_legaux(Couleur, Plateau, Coups) :-
 %
 % Retourne la couleur de l'adversaire de Couleur1.
 %
+% ex:
+% ? - couleur_adversaire(b, X).
+% > X = w
+
+couleur_adversaire(r, g).
+couleur_adversaire(g, r).
+
+%---------- fin couleur_adversaire() --------------
 % ex:
 % ? - couleur_adversaire(b, X).
 % > X = w
