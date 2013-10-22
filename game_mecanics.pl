@@ -261,9 +261,3 @@ cases_a_retourner(Case,Plateau,Couleur,ARetourner) :-
 
 	
 
-, CasesRetourner),ARetourner).	
-=======
-	findall(CasesRetourner,sandwich(Case , _ , Plateau , Couleur , CasesRetourner),ARetournerTemp),
-	depile(ARetournerTemp, ARetourner).
-	
-%--------- fin sandwich() ---------------
