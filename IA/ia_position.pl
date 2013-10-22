@@ -33,12 +33,31 @@ valeur_case(Case,Valeur) :- member(Case,[[-2,2],[2,2],[2,-2],[-2,-2]]),valeurs(u
 valeur_case(Case,Valeur) :- member(Case,[[-1,2],[1,2],[-1,-1],[-1,1],[-2,1],[-2,-1],[2,1],[2,-1]]),valeurs(deux,Valeur).
 valeur_case(Case,Valeur) :- member(Case,[[-1,1],[1,-1],[1,1],[-1,-1]]),valeurs(seize,Valeur).
 
-calcul(T|Q],Best,Choix):-
-	valeur_case(T,Val),
+choix_best(Case,ActuelBest,NewBest) :-
+	valeur_case(Case,V1),
+	valeur_case(ActuelBest,V2),
+	V1<V2,
+	NewBest = ActuelBest.	
+choix_best(Case,ActuelBest,NewBest) :-
+	valeur_case(Case,V1),
+	valeur_case(ActuelBest,V2),
+	V1>V2,
+	NewBest = Case.	
+choix_best(Case,ActuelBest,NewBest) :-
+	valeur_case(Case,V1),
+	valeur_case(ActuelBest,V2),
+	V1==V2,
+	NewBest = ActuelBest.
 
-.
-choix_move([T|Q],Choix) :-
-	valeur_case(T,Val),
+calcul([T|[]],Best,Choix) :- choix_best(T,Best,Choix).
+calcul([T|Q],Best,Choix):-
+	choix_best(T,Best,NewBest),
+	calcul(Q,NewBest,Choix).
+	
+choix_move([T|Q],Choix):-
+	Best = T, %Initialise
+	calcul(Q,Best,Choix).
+
 	
 		
 	
