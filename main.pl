@@ -1,7 +1,7 @@
 :- [regles].
 :- [display].
 :- [game_mecanics].
-:- [ia_random].
+:- [ia_position].
 
 playAll(Jeu) :- 
 	init_plateau(Plateau),
