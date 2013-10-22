@@ -236,3 +236,11 @@ couleur_adversaire(r, g).
 couleur_adversaire(g, r).
 
 %---------- fin couleur_adversaire() --------------
+% ex:
+% ? - couleur_adversaire(b, X).
+% > X = w
+
+couleur_adversaire(r, g).
+couleur_adversaire(g, r).
+
+%---------- fin couleur_adversaire() --------------
