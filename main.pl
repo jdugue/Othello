@@ -6,7 +6,7 @@
 playAll(Jeu) :- 
 	init_plateau(Plateau),
 	display(Plateau),
-	jouer(Plateau,r).
+	jouer(Plateau,g).
 
 
 %Fin de jeu, plus aucun coup légal pour les joueurs
