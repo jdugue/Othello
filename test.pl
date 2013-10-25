@@ -1,11 +1,3 @@
-choix_best(V1,V2,Best) :-
-	V1<V2,
-	Best is V2.
-	
-choix_best(V1,V2,Best) :-
-	V1>V2,
-	Best is V1.
-	
-choix_best(V1,V2,Best) :-
-	V1==V2,
-	Best is V2.
+dernier_element( [ H | [ ] ],H). 	%Condition d’arrêt de la récursivité
+	dernier_element([ H | T ], Dernier) :-
+		dernier_element(T,Dernier).                          	%Récursivité
