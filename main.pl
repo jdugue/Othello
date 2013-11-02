@@ -4,6 +4,7 @@
 :- [ia_random].
 :- [ia_position].
 :- [ia_max_retour].
+:- [ia_lazy].
 
 playAll(Joueurs) :- 
 	init_plateau(Plateau),
@@ -28,12 +29,12 @@ jouer(Plateau,Couleur,_) :-
 	affichage_resultat(Plateau).
 	
 %Pas fin de jeu, mais joueur bloqué
-jouer(Plateau,Couleur,_) :-
+jouer(Plateau,Couleur,Joueurs) :-
 	coups_legaux(Couleur, Plateau, Coups),
 	length(Coups,L),
 	L == 0,
 	couleur_adversaire(Couleur,Adv),
-	jouer(Plateau,Adv,_).
+	jouer(Plateau,Adv,Joueurs).
 
 %Déroulement normal
 jouer(Plateau,Couleur,Joueurs) :-
@@ -66,7 +67,12 @@ trouver_bon_choix(g,[mr,_],Plateau,Coups,Choix) :-
 	
 trouver_bon_choix(r,[_,mr],Plateau,Coups,Choix) :-
 	choix_move_MR(Coups,Plateau,r,Choix).	
+
+trouver_bon_choix(g,[lazy,_],Plateau,Coups,Choix) :-
+	choix_move_LAZY(Coups,Plateau,g,Choix).	
 	
+trouver_bon_choix(r,[_,lazy],Plateau,Coups,Choix) :-
+	choix_move_LAZY(Coups,Plateau,r,Choix).
 	
 affichage_resultat([J1|[J2]]) :-
 	length(J1,L1),
