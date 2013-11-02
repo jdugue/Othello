@@ -6,10 +6,12 @@
 :- [ia_max_retour].
 
 playAll(Joueurs) :- 
-	faux_plateau(Plateau),
+	init_plateau(Plateau),
 	display(Plateau),
 	jouer(Plateau,g,Joueurs).
 
+jouer([[]|_],_,_) :-
+	print('caca').
 
 %Fin de jeu, plus aucun coup légal pour les joueurs
 jouer(Plateau,Couleur,_) :-
@@ -51,13 +53,13 @@ trouver_bon_choix(r,[_,rand],Plateau,Coups,Choix) :-
 	choix_move_RAND(Coups,Plateau,r,Choix).
 	
 trouver_bon_choix(g,[pos,_],Plateau,Coups,Choix) :-
-	choix_move_POS(Coups,Plateau,r,Choix).
+	choix_move_POS(Coups,Plateau,g,Choix).
 	
 trouver_bon_choix(r,[_,pos],Plateau,Coups,Choix) :-
 	choix_move_POS(Coups,Plateau,r,Choix).	
 	
 trouver_bon_choix(g,[mr,_],Plateau,Coups,Choix) :-
-	choix_move_MR(Coups,Plateau,r,Choix).	
+	choix_move_MR(Coups,Plateau,g,Choix).	
 	
 trouver_bon_choix(r,[_,mr],Plateau,Coups,Choix) :-
 	choix_move_MR(Coups,Plateau,r,Choix).	

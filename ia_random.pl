@@ -8,10 +8,10 @@
 % ? - choix_move([[2,1],[3,2],[-3,4],[-1,4],[2,3],[-4,4]],R).
 
 choix_move_RAND([], []).
-choix_move_RAND(Coups,_,_,Choix) :-
-        length(Coups, Length),
-        random(0, Length, Index),
-        nth0(Index, Coups, Choix).
+choix_move_RAND([T|Q],_,_,T).
+        %length(Coups, Length),
+        %random(0, Length, Index),
+        %nth0(Index, Coups, Choix).
 
 %------------- fin choix_move() ------------------
 
