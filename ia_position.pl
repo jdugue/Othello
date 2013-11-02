@@ -54,7 +54,7 @@ calcul([T|Q],Best,Choix):-
 	choix_best(T,Best,NewBest),
 	calcul(Q,NewBest,Choix).
 	
-choix_move([T|Q],Plateau,Couleur,Choix):-
+choix_move_POS([T|Q],_,_,Choix):-
 	Best = T, %Initialise
 	calcul(Q,Best,Choix).
 
