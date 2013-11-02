@@ -1,7 +1,7 @@
 :- [regles].
 :- [display].
 :- [game_mecanics].
-:- [ia_max_retour].
+:- [ia_position].
 
 playAll(Jeu) :- 
 	init_plateau(Plateau),
@@ -28,6 +28,7 @@ jouer(Plateau,Couleur) :-
 	couleur_adversaire(Couleur,Adv),
 	jouer(Plateau,Adv).
 
+%Déroulement normal
 jouer(Plateau,Couleur) :-
 	coups_legaux(Couleur, Plateau, Coups),
 	choix_move(Coups,Plateau,Couleur,Choix),
@@ -55,7 +56,6 @@ vainqueur(L1,L2) :-
 	L1>L2,
 	write('Green gagne !').
 	
-vainqueur(L1,L2) :-
-	L1==L2,
+vainqueur(L1,L1) :-
 	write('Egalité !').	
 	
