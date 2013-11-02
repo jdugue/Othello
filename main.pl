@@ -6,7 +6,7 @@
 :- [ia_max_retour].
 
 playAll(Joueurs) :- 
-	init_plateau(Plateau),
+	faux_plateau(Plateau),
 	display(Plateau),
 	jouer(Plateau,g,Joueurs).
 
