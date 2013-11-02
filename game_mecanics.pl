@@ -187,11 +187,19 @@ depile([T|Q], R) :- depile(Q, R2), append(R2, T, R).
 
 %------------- fin depile() ------------------
 
+%----------------------------------------
+%
+% @Mael
+
+
 valide_case_suivante(Case , Direction , Plateau , Couleur) :-
 	case_voisine(Case, Direction , CaseVoisine),
 	not(est_vide(CaseVoisine , Plateau)),
 	couleur_adversaire(Couleur,CouleurAdv),
 	joueurDuPion(CaseVoisine , Plateau , CouleurAdv ).
+	
+	
+%---------- fin valide_case_suivante() -----
 	
 %---------------------------------------
 % check_sandwich(+Case, +Direction , +Plateau , +Couleur)
@@ -239,6 +247,7 @@ temp_sandwich(Case, Direction, Plateau, Couleur, [Case]) :-
 temp_sandwich(Case, Direction, Plateau, Couleur, [Case| CaseSand]) :- 
 	case_voisine(Case, Direction, Voisine), 
 	not(est_vide(Voisine, Plateau)),
+	not(joueurDuPion(Voisine, Plateau, Couleur)),
 	temp_sandwich(Voisine, Direction, Plateau, Couleur, CaseSand).
 	
 %--------- fin sandwich() ---------------
@@ -255,7 +264,7 @@ cases_a_retourner(Case,Plateau,Couleur,ARetourner) :-
 	findall(CasesRetourner,sandwich(Case , _ , Plateau , Couleur , CasesRetourner),ARetournerTemp),
 	depile(ARetournerTemp, ARetourner).
 	
-%--------- fin sandwich() ---------------
+%--------- fin cases_a_retourner() ---------------
 
 	
 
