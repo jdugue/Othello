@@ -134,13 +134,14 @@ est_vide(Position,[J1|[J2]]) :- not(memberchk(Position,J1)), not(memberchk(Posit
 % > X = [[-2, 1], [-3, 1], [3, 3]]
 
 calcul_cases_vides([Pos],Plateau,[Pos]) :- est_vide(Pos,Plateau).
-calcul_cases_vides([_],_,[]).
-
+calcul_cases_vides([Pos],Plateau,[]) :- not(est_vide(Pos, Plateau)).
 
 calcul_cases_vides([T|Q],Plateau,[T|Vides]) :- 
 	est_vide(T,Plateau),
 	calcul_cases_vides(Q,Plateau,Vides).
-calcul_cases_vides([_|Q],Plateau,Vides) :- 
+	
+calcul_cases_vides([T|Q],Plateau,Vides) :-
+	not(est_vide(T, Plateau)), 
 	calcul_cases_vides(Q,Plateau,Vides).
 
 %------------- fin calcul_cases_vides() -----------
