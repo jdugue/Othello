@@ -15,5 +15,5 @@ Projet prolog INSA de Lyon 4IF
 <b>Notations variables :</b><br />
 +X : Variable X en entrée<br />
 -Y Variable Y en sortie<br />
-Plateau = [ PionsBlancs , PionsNoirs ] = une liste de 2 listes contenant les pions<br />
+Plateau = [ PionsVerts , PionsRouges ] = une liste de 2 listes contenant les pions<br />
 
