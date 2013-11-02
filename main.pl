@@ -10,8 +10,11 @@ playAll(Joueurs) :-
 	display(Plateau),
 	jouer(Plateau,g,Joueurs).
 
-jouer([[]|_],_,_) :-
-	print('caca').
+jouer([[]|J2],_,_) :-
+	affichage_resultat([[]|J2]).
+	
+jouer([J1|[]],_,_) :-
+	affichage_resultat([J1|[]]).
 
 %Fin de jeu, plus aucun coup légal pour les joueurs
 jouer(Plateau,Couleur,_) :-
