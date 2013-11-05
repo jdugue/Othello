@@ -8,5 +8,3 @@ do
 	sed -e 's/Red gagne !/Red/g' -e 's/Green gagne !/Green/g' -e 's/Egalité !/Egalite/g' temp2.txt >> result.txt
 	rm temp.txt temp2.txt
 done
-
-
