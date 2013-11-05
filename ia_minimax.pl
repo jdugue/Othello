@@ -11,7 +11,7 @@
 	deux : 2
 	seize : 16
 ***************************************************************************************************************************************/
-
+/*
 valeurs(cc,500).
 valeurs(mdcc,-250).
 valeurs(mcc,-150).
@@ -32,7 +32,7 @@ valeur_case(Case,Valeur) :- member(Case,[[-2,3],[-1,3],[1,3],[2,3],[-2,-3],[-1,-
 valeur_case(Case,Valeur) :- member(Case,[[-2,2],[2,2],[2,-2],[-2,-2]]),valeurs(un,Valeur).
 valeur_case(Case,Valeur) :- member(Case,[[-1,2],[1,2],[-1,-2],[1,-2],[-2,1],[-2,-1],[2,1],[2,-1]]),valeurs(deux,Valeur).
 valeur_case(Case,Valeur) :- member(Case,[[-1,1],[1,-1],[1,1],[-1,-1]]),valeurs(seize,Valeur).
-
+*/
 
 /* Algo minimax d'apres le livre The Art Of Prolog */
 /*
