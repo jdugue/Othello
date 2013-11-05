@@ -162,10 +162,10 @@ cases_vides([T|Q],Plateau,[T|Vides]) :- est_vide(T,Plateau), cases_vides(Q,Plate
 cases_vides([_|Q],Plateau,Vides) :- cases_vides(Q,Plateau,Vides).
 **/
 
-/*cases_vides(ListeCases, Plateau, Case) :-
+cases_vides(ListeCases, Plateau, Case) :-
 	member(Case, ListeCases),
 	est_vide(Case, Plateau).
-*/
+
 all_cases_vides(ListeCases, Plateau, ListeCasesVides) :-
 	findall(Case, cases_vides(ListeCases, Plateau, Case), ListeCasesVides).
 	

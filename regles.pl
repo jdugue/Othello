@@ -157,7 +157,7 @@ calcul_cases_vides([T|Q],Plateau,Vides) :-
 % ? - cases_vides([[-2,1],[1,1],[-3,1],[3,3]],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]],X).
 % > X = [[-2, 1], [-3, 1], [3, 3]]
 
-cases_vides(Positions,Plateau,ListeCases) :- findall(Vides, calcul_cases_vides(Positions,Plateau,Vides), [ListeCases|_]).
+%cases_vides(Positions,Plateau,ListeCases) :- findall(Vides, calcul_cases_vides(Positions,Plateau,Vides), [ListeCases|_]).
 
 %------------- fin cases_vides() ------------------
 
