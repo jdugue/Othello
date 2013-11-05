@@ -5,6 +5,7 @@
 :- [ia_position].
 :- [ia_max_retour].
 :- [ia_lazy].
+:- [ia_minimax].
 
 playAll(Joueurs) :- 
 	init_plateau(Plateau),
@@ -33,20 +34,22 @@ jouer(Plateau,Couleur,Joueurs) :-
 	coups_legaux(Couleur, Plateau, Coups),
 	length(Coups,L),
 	L == 0,
-	couleur_adversaire(Couleur,Adv),
+	couleur_adversaire(Couleur,Adv),!,
 	jouer(Plateau,Adv,Joueurs).
 
 %Déroulement normal
 jouer(Plateau,Couleur,Joueurs) :-
 	coups_legaux(Couleur, Plateau, Coups),
+	%print(Coups),nl,
 	trouver_bon_choix(Couleur,Joueurs,Plateau,Coups,Choix),
+	%print(Choix),nl,
 	cases_a_retourner(Choix,Plateau,Couleur,ARetourner),
 	retourne_all(ARetourner,Plateau,PlateauTemp),
 	ajoutePion(Choix,Couleur,PlateauTemp,NewPlateau),
 	display(NewPlateau),
 	%sleep(5),
 	couleur_adversaire(Couleur,Adv),
-	jouer(NewPlateau,Adv,Joueurs). %On ajoute le pion que l'on a décidé de jouer
+	jouer(NewPlateau,Adv,Joueurs). 
 	
 	
 %Permet de trouver quelle stratégie jouer	
@@ -73,6 +76,12 @@ trouver_bon_choix(g,[lazy,_],Plateau,Coups,Choix) :-
 	
 trouver_bon_choix(r,[_,lazy],Plateau,Coups,Choix) :-
 	choix_move_LAZY(Coups,Plateau,r,Choix).
+	
+trouver_bon_choix(g,[mm,_],Plateau,Coups,Choix) :-
+	choix_move_MM(Coups, g,Plateau,3 ,1, (nil,-1000), (Choix,Value)).	
+	
+trouver_bon_choix(r,[_,mm],Plateau,Coups,Choix) :-
+	choix_move_MM(Coups, r,Plateau,3 ,1, (nil,-1000), (Choix,Value)).
 	
 affichage_resultat([J1|[J2]]) :-
 	length(J1,L1),
