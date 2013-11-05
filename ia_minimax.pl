@@ -63,9 +63,9 @@ update(Move, Value, (Move1,Value1), (Move,Value)) :-
 */	
 	
 %Adaptation
-choix_move_MM([], Couleur,Plateau, 3, MaxMin, (MRecord,VRecord), (MRecord,VRecord)).
-choix_move_MM([], Couleur,Plateau, Profondeur, MaxMin, (MRecord,VRecord), (MBest,VRecord)).
-choix_move_MM([Move|[]], Couleur,Plateau,Profondeur ,MaxMin, Record, (Move,_)).
+choix_move_MM([], _,_, 3, _, (MRecord,VRecord), (MRecord,VRecord)).
+choix_move_MM([], _,_, _, _, (_,VRecord), (_,VRecord)).
+choix_move_MM([Move|[]], _,_,_ ,_, _, (Move,_)).
 choix_move_MM([Move|Moves], Couleur,Plateau,Profondeur ,MaxMin, Record, Choix) :-
 	%notrace,
 	%print(Move + Profondeur),nl,
@@ -81,7 +81,7 @@ choix_move_MM([Move|Moves], Couleur,Plateau,Profondeur ,MaxMin, Record, Choix) :
 	choix_move_MM(Moves,Couleur, Plateau, Profondeur, MaxMin, NewRecord, Choix).
 	%notrace.
 
-minimax(Couleur,0, Plateau, MaxMin, Move, Value) :-
+minimax(_,0, _, MaxMin, Move, Value) :-
 	valeur_case(Move,V),
 	Value is  V*MaxMin.
 
@@ -94,8 +94,8 @@ minimax(Couleur,Profondeur, Plateau, MaxMin, Move, Value) :-
 	MinMax is -MaxMin, 
 	choix_move_MM(Coups, Adv,Plateau, NewProfondeur, MinMax, (nil,-1000), (Move,Value)).
 
-update(Move, Value, (Move1,Value1), (Move1,Value1)) :-
+update(_, Value, (Move1,Value1), (Move1,Value1)) :-
 	Value =< Value1.	
 
-update(Move, Value, (Move1,Value1), (Move,Value)) :-
+update(Move, Value, (_,Value1), (Move,Value)) :-
 	Value > Value1.	

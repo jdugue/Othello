@@ -78,10 +78,10 @@ trouver_bon_choix(r,[_,lazy],Plateau,Coups,Choix) :-
 	choix_move_LAZY(Coups,Plateau,r,Choix).
 	
 trouver_bon_choix(g,[mm,_],Plateau,Coups,Choix) :-
-	choix_move_MM(Coups, g,Plateau,3 ,1, (nil,-1000), (Choix,Value)).	
+	choix_move_MM(Coups, g,Plateau,3 ,1, (nil,-1000), (Choix,_)).	
 	
 trouver_bon_choix(r,[_,mm],Plateau,Coups,Choix) :-
-	choix_move_MM(Coups, r,Plateau,3 ,1, (nil,-1000), (Choix,Value)).
+	choix_move_MM(Coups, r,Plateau,3 ,1, (nil,-1000), (Choix,_)).
 	
 affichage_resultat([J1|[J2]]) :-
 	length(J1,L1),
