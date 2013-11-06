@@ -43,10 +43,10 @@ choix_move_MM_POS([Move|Moves], Couleur,Plateau,Profondeur ,MaxMin, Record, Choi
 	minimax_POS(Couleur,Profondeur, NewPlateau, MaxMin, Move, Value), 
 	update(Move , Value , Record, NewRecord),
 	choix_move_MM_POS(Moves,Couleur, Plateau, Profondeur, MaxMin, NewRecord, Choix),notrace.
-choix_move_MM_POS([], Couleur,Plateau,2 ,MaxMin, (Test,Record),(Test,Record)).
-choix_move_MM_POS([], Couleur,Plateau,Profondeur ,MaxMin, (Test,Record),(_,Record)).
+choix_move_MM_POS([], _,_,2 ,_, Record,Record).
+choix_move_MM_POS([], _,_,_ ,_, (_,Record),(_,Record)).
 
-minimax_POS(Couleur,0, NewPlateau, MaxMin, Move, Value) :-
+minimax_POS(_,0, _, MaxMin, Move, Value) :-
 	valeur_case(Move,V),
 	Value is  V*MaxMin.
 

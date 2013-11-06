@@ -44,15 +44,15 @@ choix_move_MM_MR([Move|Moves], Couleur,Plateau,Profondeur ,MaxMin, Record, Choix
 	minimax_MR(Couleur,Profondeur, Plateau,NewPlateau, MaxMin, Move, Value), 
 	update(Move , Value , Record, NewRecord),
 	choix_move_MM_MR(Moves,Couleur, Plateau, Profondeur, MaxMin, NewRecord, Choix),notrace.
-choix_move_MM_MR([], Couleur,Plateau,2 ,MaxMin, Record,Record).
-choix_move_MM_MR([], Couleur,Plateau,Profondeur ,MaxMin, (Test,Record),(_,Record)).
+choix_move_MM_MR([], _,_,2 ,_, Record,Record).
+choix_move_MM_MR([], _,_,_ ,_, (_,Record),(_,Record)).
 
-minimax_MR(Couleur,0, Old,Plateau, MaxMin, Move, Value) :-
+minimax_MR(Couleur,0, Old,_, MaxMin, Move, Value) :-
 	cases_a_retourner(Move,Old,Couleur,RetourneCoup),
 	length(RetourneCoup,V),
 	Value is  V*MaxMin.
 
-minimax_MR(Couleur,Profondeur, Old,Plateau, MaxMin, Move, Value) :-
+minimax_MR(Couleur,Profondeur, _,Plateau, MaxMin, Move, Value) :-
 	Profondeur>0, 
 	couleur_adversaire(Couleur,Adv),
 	coups_legaux(Adv, Plateau, Coups),
