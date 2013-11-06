@@ -25,13 +25,14 @@ update(Move, Value, (Move1,Value1), (Move,Value1)) :-
 update(Move, Value, (Move1,Value1), (Move,Value)) :-
 	Value > Value1.	
 */	
+
+%Adaptation	
 	
 move(Move, Plateau, Couleur, NewPlateau) :-
 	cases_a_retourner(Move,Plateau,Couleur,ARetourner),
 	retourne_all(ARetourner,Plateau,PlateauTemp),
 	ajoutePion(Move,Couleur,PlateauTemp,NewPlateau).
 	
-%Adaptation	
 choix_move_MM_MR([Move|[]], Couleur,Plateau,Profondeur ,MaxMin, Record, Choix) :-
 	cases_a_retourner(Move,Plateau,Couleur,RetourneCoup),
 	length(RetourneCoup,V),

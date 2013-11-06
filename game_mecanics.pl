@@ -172,19 +172,12 @@ depile([T|Q], R) :- depile(Q, R2), append(R2, T, R).
 
 %------------- fin depile() ------------------
 
-%----------------------------------------
-%
-% @Mael
-
-
 valide_case_suivante(Case , Direction , Plateau , Couleur) :-
 	case_voisine(Case, Direction , CaseVoisine),
 	not(est_vide(CaseVoisine , Plateau)),
 	couleur_adversaire(Couleur,CouleurAdv),
 	joueurDuPion(CaseVoisine , Plateau , CouleurAdv ).
-	
-	
-%---------- fin valide_case_suivante() -----
+
 	
 %---------------------------------------
 % check_sandwich(+Case, +Direction , +Plateau , +Couleur)
