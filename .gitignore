@@ -1,2 +1,7 @@
 # fichiers temp
 *~
+temp*
+^[0-9]+$
+green
+red
+*.txt
