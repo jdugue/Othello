@@ -183,8 +183,6 @@ cases_qui_sandwich(Positions, Couleur, Plateau, ListeCasesOK) :-
 %
 % ex :
 % ? - coups_legaux(b, [[[1,1],[-1,-1]],[[1,-1],[-1,1]]], Coups).
-% > Coups =
-
 	
 coups_legaux(Couleur, Plateau, Coups) :-
 	couleur_adversaire(Couleur,Adversaire),
