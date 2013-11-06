@@ -7,7 +7,7 @@
 % ex:
 % ? - choix_move([[2,1],[3,2],[-3,4],[-1,4],[2,3],[-4,4]],R).
 
-choix_move_RAND([], []).
+choix_move_RAND([],_,_, []).
 choix_move_RAND(Coups,_,_,Choix) :-
         length(Coups, Length),
         random(0, Length, Index),

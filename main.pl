@@ -1,4 +1,3 @@
-#!/usr/bin/swipl -G8g -s
 :- [regles].
 :- [display].
 :- [game_mecanics].
@@ -6,7 +5,8 @@
 :- [ia_position].
 :- [ia_max_retour].
 :- [ia_lazy].
-:- [ia_minimax].
+:- [ia_minimax_MR].
+:- [ia_minimax_POS].
 
 playAll(Joueurs) :- 
 	init_plateau(Plateau),
@@ -35,7 +35,7 @@ jouer(Plateau,Couleur,Joueurs) :-
 	coups_legaux(Couleur, Plateau, Coups),
 	length(Coups,L),
 	L == 0,
-	couleur_adversaire(Couleur,Adv),!,
+	couleur_adversaire(Couleur,Adv),
 	jouer(Plateau,Adv,Joueurs).
 
 %Déroulement normal
@@ -75,11 +75,17 @@ trouver_bon_choix(g,[lazy,_],Plateau,Coups,Choix) :-
 trouver_bon_choix(r,[_,lazy],Plateau,Coups,Choix) :-
 	choix_move_LAZY(Coups,Plateau,r,Choix).
 	
-trouver_bon_choix(g,[mm,_],Plateau,Coups,Choix) :-
-	choix_move_MM(Coups, g,Plateau,3 ,1, (nil,-1000), (Choix,_)).	
+trouver_bon_choix(g,[mmMR,_],Plateau,Coups,Choix) :-
+	choix_move_MM_MR(Coups, g,Plateau,2 ,1, (nil,-1000), (Choix,_)).	
 	
-trouver_bon_choix(r,[_,mm],Plateau,Coups,Choix) :-
-	choix_move_MM(Coups, r,Plateau,3 ,1, (nil,-1000), (Choix,_)).
+trouver_bon_choix(r,[_,mmMR],Plateau,Coups,Choix) :-
+	choix_move_MM_MR(Coups, r,Plateau,2 ,1, (nil,-1000), (Choix,_)).
+	
+trouver_bon_choix(g,[mmPOS,_],Plateau,Coups,Choix) :-
+	choix_move_MM_POS(Coups, g,Plateau,2 ,1, (nil,-1000), (Choix,_)).	
+	
+trouver_bon_choix(r,[_,mmPOS],Plateau,Coups,Choix) :-
+	choix_move_MM_POS(Coups, r,Plateau,2 ,1, (nil,-1000), (Choix,_)).
 	
 affichage_resultat([J1|[J2]]) :-
 	length(J1,L1),
