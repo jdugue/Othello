@@ -3,7 +3,7 @@
 nbtime=20
 red=0
 green=0
-eg=0
+eq=0
 pourcent=0
 
 for i in `seq 1 $nbtime`;
@@ -43,20 +43,24 @@ then
 	# echo "1"
 	pourcent=$(($red * 100 / $nbtime))
 	vainqueur=$2
+	couleur="ROUGE"
 	# echo "pourcent "$pourcent
 elif [ "$green" -gt "$red" ]
 then
 	# echo "2"
 	pourcent=$(($green * 100 / $nbtime))
 	vainqueur=$1
+	couleur="VERT"
 	# echo "pourcent "$pourcent
 fi
 
-# echo "red "$red
-# echo "green "$green
-echo "\t \t--------------------------------------"
-echo "\t \t|  Match de l'IA $1 contre l'IA $2 |"
-echo "\t \t--------------------------------------"
+echo "pourcent "$pourcent
+echo "red "$red
+echo "green "$green
+echo "eq "$eq
+echo "\t \t------------------------------------------------------"
+echo "\t \t|  Match de l'IA $1 (VERT) contre l'IA $2 (ROUGE)|"
+echo "\t \t------------------------------------------------------"
 echo "\n"
-echo "\tl'IA $vainqueur est la plus forte, elle a gagné dans $pourcent pourcent des parties"
+echo "\t \tl'IA $vainqueur gagne dans $pourcent % des parties quand elle joue $couleur"
 echo "\n"
