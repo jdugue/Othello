@@ -132,21 +132,6 @@ retourne_all([T|Q], Plateau ,NewPlateau) :-
 %------------- fin retourne_all() -------------------
 
 %--------------------------------------------------
-% est_vide(+Position,+Plateau)
-% @Tanguy
-%
-% Regarde si la case Position est vide.
-%
-% ex:
-% ? - est_vide([3,3],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]).
-% ? - est_vide([1,1],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]).
-%
-
-%est_vide(Position,[J1|[J2]]) :- not(member(Position,J1)), not(member(Position,J2)).
-
-%------------- fin est_vide() ------------------
-
-%--------------------------------------------------
 % all_cases_vides(+Positions,+Plateau,-Vides)
 % @Tanguy
 %
