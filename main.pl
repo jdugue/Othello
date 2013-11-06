@@ -1,3 +1,4 @@
+#!/usr/bin/swipl -G8g -s
 :- [regles].
 :- [display].
 :- [game_mecanics].
@@ -45,7 +46,6 @@ jouer(Plateau,Couleur,Joueurs) :-
 	retourne_all(ARetourner,Plateau,PlateauTemp),
 	ajoutePion(Choix,Couleur,PlateauTemp,NewPlateau),
 	display(NewPlateau),
-	%sleep(5),
 	couleur_adversaire(Couleur,Adv),
 	jouer(NewPlateau,Adv,Joueurs). 
 	

@@ -38,7 +38,7 @@ choix_move_MM([Move|Moves], Couleur,Plateau,Profondeur ,MaxMin, Record, Choix) :
 	update(Move , Value , Record, NewRecord),
 	choix_move_MM(Moves,Couleur, Plateau, Profondeur, MaxMin, NewRecord, Choix).
 
-minimax(_,0, _, MaxMin, Move, Value) :-
+minimax(Couleur,0, NewPlateau, MaxMin, Move, Value) :-
 	valeur_case(Move,V),
 	Value is  V*MaxMin.
 
