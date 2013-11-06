@@ -26,11 +26,11 @@ update(Move, Value, (Move1,Value1), (Move,Value)) :-
 	Value > Value1.	
 */	
 
-move(Move, Plateau, Couleur, NewPlateau) :-
+/*move(Move, Plateau, Couleur, NewPlateau) :-
 	cases_a_retourner(Move,Plateau,Couleur,ARetourner),
 	retourne_all(ARetourner,Plateau,PlateauTemp),
 	ajoutePion(Move,Couleur,PlateauTemp,NewPlateau).
-	
+*/	
 %Adaptation	
 choix_move_MM_POS([Move|[]], Couleur,Plateau,Profondeur ,MaxMin, Record, Choix) :-
 	valeur_case(Move,V),
@@ -57,9 +57,10 @@ minimax_POS(Couleur,Profondeur, Plateau, MaxMin, Move, Value) :-
 	NewProfondeur is Profondeur - 1, 
 	MinMax is -MaxMin, 
 	choix_move_MM_POS(Coups, Adv,Plateau, NewProfondeur, MinMax, (nil,-1000), (Move,Value)).
-
+/*
 update(_, Value, (Move1,Value1), (Move1,Value1)) :-
 	Value =< Value1.	
 
 update(Move, Value, (_,Value1), (Move,Value)) :-
 	Value > Value1.	
+*/
