@@ -1,5 +1,3 @@
-:-[game_mecanics].
-
 choix_best(Case,Plateau,Couleur,ActuelBest,NewBest) :-
 	cases_a_retourner(Case,Plateau,Couleur,RetourneCoup),
 	length(RetourneCoup,N1), 
