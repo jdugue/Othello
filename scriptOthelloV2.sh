@@ -8,16 +8,14 @@ pourcent=0
 
 for i in `seq 1 $nbtime`;
 do
-	# rm temp.txt
-	# rm temp2.txt
 	swipl -q -s main.pl -t "playAll([ $1 , $2 ])." > temp.txt
 	tail -n 1  temp.txt > temp2.txt
 	#echo " " >> temp2.txt
 	sed -e 's/Red gagne !/Red /g' -e 's/Green gagne !/Green /g' -e 's/Egalité !/Egalite/g' temp2.txt > temp.txt
 	temp=`cat temp.txt`
-	# rm temp.txt temp2.txt
+	rm temp.txt temp2.txt
 
-	echo "temp "$temp
+	# echo "temp "$temp
 
 	if [ $temp = "Red" ]
 	then
@@ -57,10 +55,10 @@ then
 	# echo "pourcent "$pourcent
 fi
 
-echo "pourcent "$pourcent
-echo "red "$red
-echo "green "$green
-echo "eq "$eq
+# echo "pourcent "$pourcent
+# echo "red "$red
+# echo "green "$green
+# echo "eq "$eq
 echo "\t \t------------------------------------------------------"
 echo "\t \t|  Match de l'IA $1 (VERT) contre l'IA $2 (ROUGE)|"
 echo "\t \t------------------------------------------------------"
