@@ -25,22 +25,29 @@ update(Move, Value, (Move1,Value1), (Move,Value1)) :-
 update(Move, Value, (Move1,Value1), (Move,Value)) :-
 	Value > Value1.	
 */	
-	
-%Adaptation
-choix_move_MM_POS([], _,_, 2, _, (MRecord,VRecord), (MRecord,VRecord)).
-choix_move_MM_POS([], _,_, _, _, (_,VRecord), (_,VRecord)).
-choix_move_MM_POS([Move|[]], _,_,_ ,_, _, (Move,_)).
-choix_move_MM_POS([Move|Moves], Couleur,Plateau,Profondeur ,MaxMin, Record, Choix) :-
+
+move(Move, Plateau, Couleur, NewPlateau) :-
 	cases_a_retourner(Move,Plateau,Couleur,ARetourner),
 	retourne_all(ARetourner,Plateau,PlateauTemp),
-	ajoutePion(Move,Couleur,PlateauTemp,NewPlateau),
+	ajoutePion(Move,Couleur,PlateauTemp,NewPlateau).
+	
+%Adaptation	
+choix_move_MM_POS([Move|[]], Couleur,Plateau,Profondeur ,MaxMin, Record, Choix) :-
+	valeur_case(Move,V),
+	Value is  V*MaxMin,
+	update(Move , Value , Record, NewRec),
+	choix_move_MM_POS([],Couleur, Plateau, Profondeur, MaxMin, NewRec, Choix).
+	
+choix_move_MM_POS([Move|Moves], Couleur,Plateau,Profondeur ,MaxMin, Record, Choix) :-
+	move(Move, Plateau, Couleur, NewPlateau),
 	minimax_POS(Couleur,Profondeur, NewPlateau, MaxMin, Move, Value), 
 	update(Move , Value , Record, NewRecord),
-	choix_move_MM_POS(Moves,Couleur, Plateau, Profondeur, MaxMin, NewRecord, Choix).
+	choix_move_MM_POS(Moves,Couleur, Plateau, Profondeur, MaxMin, NewRecord, Choix),notrace.
+choix_move_MM_POS([], Couleur,Plateau,2 ,MaxMin, (Test,Record),(Test,Record)).
+choix_move_MM_POS([], Couleur,Plateau,Profondeur ,MaxMin, (Test,Record),(_,Record)).
 
 minimax_POS(Couleur,0, NewPlateau, MaxMin, Move, Value) :-
 	valeur_case(Move,V),
-	print('mmPOS'),nl,
 	Value is  V*MaxMin.
 
 minimax_POS(Couleur,Profondeur, Plateau, MaxMin, Move, Value) :-

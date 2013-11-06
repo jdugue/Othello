@@ -42,6 +42,8 @@ jouer(Plateau,Couleur,Joueurs) :-
 jouer(Plateau,Couleur,Joueurs) :-
 	coups_legaux(Couleur, Plateau, Coups),
 	trouver_bon_choix(Couleur,Joueurs,Plateau,Coups,Choix),
+	%print(Couleur+Coups),nl,	
+	%print(Choix),nl,
 	cases_a_retourner(Choix,Plateau,Couleur,ARetourner),
 	retourne_all(ARetourner,Plateau,PlateauTemp),
 	ajoutePion(Choix,Couleur,PlateauTemp,NewPlateau),
