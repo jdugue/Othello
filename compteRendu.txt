@@ -1,0 +1,32 @@
+	 	------------------------------------------------------
+	 	|  Match de l'IA rand (VERT) contre l'IA lazy (ROUGE)|
+	 	------------------------------------------------------
+
+
+	 	l'IA lazy gagne dans 54 % des parties quand elle joue ROUGE
+
+
+	 	------------------------------------------------------
+	 	|  Match de l'IA rand (VERT) contre l'IA mr (ROUGE)|
+	 	------------------------------------------------------
+
+
+	 	l'IA mr gagne dans 57 % des parties quand elle joue ROUGE
+
+
+	 	------------------------------------------------------
+	 	|  Match de l'IA rand (VERT) contre l'IA pos (ROUGE)|
+	 	------------------------------------------------------
+
+
+	 	l'IA pos gagne dans 86 % des parties quand elle joue ROUGE
+
+
+	 	------------------------------------------------------
+	 	|  Match de l'IA mmPOS (VERT) contre l'IA rand (ROUGE)|
+	 	------------------------------------------------------
+
+
+	 	l'IA rand gagne dans 60 % des parties quand elle joue ROUGE
+
+

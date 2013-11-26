@@ -132,21 +132,6 @@ retourne_all([T|Q], Plateau ,NewPlateau) :-
 %------------- fin retourne_all() -------------------
 
 %--------------------------------------------------
-% est_vide(+Position,+Plateau)
-% @Tanguy
-%
-% Regarde si la case Position est vide.
-%
-% ex:
-% ? - est_vide([3,3],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]).
-% ? - est_vide([1,1],[[[1,1],[-1,-1],[2,1]],[[1,-1],[-1,1]]]).
-%
-
-est_vide(Position,[J1|[J2]]) :- not(member(Position,J1)), not(member(Position,J2)).
-
-%------------- fin est_vide() ------------------
-
-%--------------------------------------------------
 % all_cases_vides(+Positions,+Plateau,-Vides)
 % @Tanguy
 %
@@ -187,19 +172,12 @@ depile([T|Q], R) :- depile(Q, R2), append(R2, T, R).
 
 %------------- fin depile() ------------------
 
-%----------------------------------------
-%
-% @Mael
-
-
 valide_case_suivante(Case , Direction , Plateau , Couleur) :-
 	case_voisine(Case, Direction , CaseVoisine),
 	not(est_vide(CaseVoisine , Plateau)),
 	couleur_adversaire(Couleur,CouleurAdv),
 	joueurDuPion(CaseVoisine , Plateau , CouleurAdv ).
-	
-	
-%---------- fin valide_case_suivante() -----
+
 	
 %---------------------------------------
 % check_sandwich(+Case, +Direction , +Plateau , +Couleur)

@@ -1,5 +1,3 @@
-:-[game_mecanics].
-
 choix_best(Case,Plateau,Couleur,ActuelBest,NewBest) :-
 	cases_a_retourner(Case,Plateau,Couleur,RetourneCoup),
 	length(RetourneCoup,N1), 
@@ -26,7 +24,8 @@ calcul([T|[]],Plateau,Couleur,Best,Choix) :- choix_best(T,Plateau,Couleur,Best,C
 calcul([T|Q],Plateau,Couleur,Best,Choix):-
 	choix_best(T,Plateau,Couleur,Best,NewBest),
 	calcul(Q,Plateau,Couleur,NewBest,Choix).
-	
+
+choix_move_MR([T|[]],_,_,T).	
 choix_move_MR([T|Q],Plateau,Couleur,Choix):-
 	Best = T, %Initialise
 	calcul(Q,Plateau,Couleur,Best,Choix).
